@@ -24,5 +24,11 @@ namespace MaquinaVending
             UnitPrice = unitPrice;
             Descripcion = descripcion;
         }
+
+        // Método que devuelve un string con la información del producto
+        public virtual string MostrarInfo()
+        {
+            return $"({Id}) {Nombre} / {Unidades} unidades disponibles / coste por unidad: {UnitPrice}€ / {Descripcion}";
+        }
     }
 }

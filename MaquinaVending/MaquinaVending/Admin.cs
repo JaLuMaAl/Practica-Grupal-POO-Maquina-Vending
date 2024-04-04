@@ -9,13 +9,31 @@ namespace MaquinaVending
 {
     internal class Admin
     {
-        // Constraseña que servirá para verificar al administrador para acceder a sus acciones
-        public int Contraseña {  get; set; }
+        // Clave que verificará al administrador para poder acceder a sus acciones exclusivas
+        public int Clave { get; set; }
 
         public Admin() { }
-        public Admin(int contraseña)
+        public Admin(int clave)
         {
-            Contraseña = contraseña;
+            Clave = clave;
+        }
+
+        // Método booleano que solicita una clave y la compara con la del admin, si coinciden devuelve true, sino devuelve false
+        public bool CheckAdmin()
+        {
+            bool check = false;
+
+            // Solicito la clave al usuario
+            Console.Write("Introduce la clave de administrador para acceder a esta funcionalidad: ");
+            int clave = int.Parse(Console.ReadLine());
+
+            // Comparo la clave obtenida con la del admin
+            if (Clave == clave)
+            {
+                check = true;
+            }
+
+            return check;
         }
     }
 }
