@@ -8,6 +8,8 @@ namespace MaquinaVending
 {
     internal class MaterialPrecioso : Producto
     {
-        public MaterialPrecioso() { }
+        public MaterialPrecioso() { 
+        
+        }
     }
 }
