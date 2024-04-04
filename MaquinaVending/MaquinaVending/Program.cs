@@ -10,7 +10,7 @@ namespace MaquinaVending
     {
         static void Main(string[] args)
         {
-            Console.Write("");
+            Console.Write("Hola mundo");
         }
     }
 }
