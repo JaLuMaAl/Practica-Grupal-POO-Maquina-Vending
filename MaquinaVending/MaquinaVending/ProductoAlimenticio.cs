@@ -12,5 +12,7 @@ namespace MaquinaVending
         public int Calorias { get; set; }
         public int Grasa { get; set; }
         public int Azucar {  get; set; }
+
+        public ProductoAlimenticio() { }
     }
 }

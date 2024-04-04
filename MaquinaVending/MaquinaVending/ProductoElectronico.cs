@@ -14,9 +14,11 @@ namespace MaquinaVending
         // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
         
         // Completar el constructor una vez incluidas las nuevas propiedades
+
+        public ProductoElectronico() { }
         public ProductoElectronico(string nombre, int unidades, double unitPrice, string descripcion, bool precargado)
             :base(nombre, unidades, unitPrice, descripcion)
-        {
+        {   
             Precargado = precargado;
         }
     }
