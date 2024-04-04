@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class MaterialePrecioso : Producto
+    internal class MaterialPrecioso : Producto
     {
-        public MaterialePrecioso() { }
+        public MaterialPrecioso() { }
     }
 }
