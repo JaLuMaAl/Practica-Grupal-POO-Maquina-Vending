@@ -10,6 +10,7 @@ namespace MaquinaVending
     {
         // Indicador de si el producto está por defecto cargado y listo para su uso
         public bool Precargado { get; set; }
+        public bool Bateria { get; set; }
 
         // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
         
