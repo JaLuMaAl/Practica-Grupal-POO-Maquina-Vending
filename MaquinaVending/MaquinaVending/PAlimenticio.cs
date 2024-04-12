@@ -24,7 +24,10 @@ namespace MaquinaVending
 
         public override string MostrarInfo()
         {
-            return base.MostrarInfo() + $"\n\tkcal: {Calorias} / grasa: {Grasa}g / azucar: {Azucar}g";
+            return $"{base.MostrarInfo()}\n" +
+                $"\nCalorías: {Calorias} kcal\n" +
+                $"Grasa: {Grasa}g\n" +
+                $"Azucar: {Azucar}g\n";
         }
     }
 }

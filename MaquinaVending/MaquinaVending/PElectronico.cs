@@ -17,15 +17,18 @@ namespace MaquinaVending
         // Completar el constructor una vez incluidas las nuevas propiedades
 
         public PElectronico() { }
-        public PElectronico(string nombre, int unidades, double unitPrice, string descripcion, bool precargado)
-            :base(nombre, unidades, unitPrice, descripcion)
+        public PElectronico(string nombre, int unidades, double precioUnidad, string descripcion, bool precargado)
+            :base(nombre, unidades, precioUnidad, descripcion)
         {   
             Precargado = precargado;
         }
 
-        public override string MostrarInfo()
+        public override string MostrarInfo() 
         {
-            
+            return $"{base.MostrarInfo()}\n" +
+                   $"Precargado: {(Precargado ? "Sí" : "No")}\n" +
+                   $"Batería: {(Bateria ? "Sí" : "No")}\n";
         }
+
     }
 }
