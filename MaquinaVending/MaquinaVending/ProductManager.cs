@@ -11,9 +11,62 @@ namespace MaquinaVending
     {
         public List<Producto> listaProductos;
 
+        // Constructor vacío
+        public ProductManager() { }
+        
+        // Constructor parametrizado
         public ProductManager(List<Producto> listaP)
         {
             listaProductos = listaP;
+        }
+
+        // Solicita un ID y recorre la lista de productos en busca de un producto cuyo ID coincida con el introducido
+        public Producto ElegirProducto()
+        {
+            Console.Write("Introduce el ID del producto: ");
+            int id = int.Parse(Console.ReadLine());
+
+            // Creo una instancia de la clase producto que almacenará el producto encontrado
+            Producto pTemp = null;
+
+            // Recorro la lista de productos comparando sus IDs con el introducido por el usuario
+            foreach (Producto p in listaProductos)
+            {
+                if (p.Id == id)
+                {
+                    pTemp = p;
+                }
+            }
+
+            // Devuelvo el producto almacenado en pTemp, si no ha encontrado el producto devolverá null
+            return pTemp;
+        }
+
+        public void Pagar(double precio)
+        {
+            Console.WriteLine("Métodos de pago disponible");
+            Console.Write("\t1. Tarjeta\n\t2. Efectivo");
+
+            int opcion = 0;
+
+            Console.Write("Opción: ");
+            opcion = int.Parse(Console.ReadLine());
+
+            switch (opcion)
+            {
+                case 1:
+                    PagoTarjeta(precio)
+            }
+        }
+
+        private void PagoTarjeta(double precio)
+        {
+
+        }
+
+        private void PagoEfectivo(double precio)
+        {
+
         }
     }
 }

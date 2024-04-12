@@ -17,8 +17,9 @@ namespace MaquinaVending
         public string Descripcion { get; set; }
 
         public Producto() { }
-        public Producto(string nombre, int unidades, double unitPrice, string descripcion)
+        public Producto(int id, string nombre, int unidades, double unitPrice, string descripcion)
         {
+            Id = id;
             Nombre = nombre;
             Unidades = unidades;
             UnitPrice = unitPrice;
