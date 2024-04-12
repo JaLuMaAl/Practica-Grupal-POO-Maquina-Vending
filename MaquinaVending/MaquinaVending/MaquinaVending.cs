@@ -16,9 +16,42 @@ namespace MaquinaVending
         }
 
         // Método encargado de proceso de compra de los productos 
-        public void ComprarProducto()
+        public void ComprarProductos()
         {
+            List<Producto> carrito = new List<Producto>();
 
+            int opcion = 0;
+            double precioTotal = 0;
+
+            Console.WriteLine(" --- PRODUCTOS DISPONIBLES ---");
+
+            foreach(Producto p in listaProductos)
+            {
+                Console.WriteLine(p.MostrarInfoCompra());
+            }
+
+            do
+            {
+                Producto productoElegido = p.ElegirProducto();
+                carrito.Add(productoElegido);
+                precioTotal =+ productoElegido.PrecioUnidad;
+                productoElegido.Unidades--;
+                Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
+
+                Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
+                opcion = int.Parse(Console.ReadLine());
+
+            } while (opcion == 1);
+
+            Console.WriteLine("Tu carrito incluye:");
+
+            foreach(Producto p in carrito)
+            {
+                Console.WriteLine($"{p.Nombre}");
+            }
+
+            Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
+            Pagar(precioTotal);
         }
 
         // Método que muestra la información completa de los productos
