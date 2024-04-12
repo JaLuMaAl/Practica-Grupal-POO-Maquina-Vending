@@ -13,23 +13,27 @@ namespace MaquinaVending
         public int Unidades { get; set; }
         
         // Precio por unidad del producto
-        public double UnitPrice { get; set; }
+        public double PrecioUnidad { get; set; }
         public string Descripcion { get; set; }
 
         public Producto() { }
-        public Producto(int id, string nombre, int unidades, double unitPrice, string descripcion)
+        public Producto(string nombre, int unidades, double precioUnidad, string descripcion)
         {
             Id = id;
             Nombre = nombre;
             Unidades = unidades;
-            UnitPrice = unitPrice;
+            PrecioUnidad = precioUnidad;
             Descripcion = descripcion;
         }
 
         // Método que devuelve un string con la información del producto
         public virtual string MostrarInfo()
         {
-            return $"({Id}) {Nombre} / {Unidades} unidades disponibles / coste por unidad: {UnitPrice}€ / {Descripcion}";
+            return $"Id: {Id}\n" +
+                $"{Nombre}\n" +
+                $"{Unidades} unidades disponibles\n" +
+                $"{PrecioUnidad}€/unidad\n" +
+                $"{Descripcion}\n";
         }
     }
 }
