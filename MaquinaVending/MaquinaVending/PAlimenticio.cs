@@ -14,9 +14,10 @@ namespace MaquinaVending
         public int Azucar {  get; set; }
 
         public PAlimenticio() { } 
-        public PAlimenticio(string nombre, int unidades, double unitPrice, string descripcion, int kcal, int grasa, int azucar)
-            :base(nombre, unidades, unitPrice, descripcion)
+        public PAlimenticio(int id,string nombre, int unidades, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
+            :base(id,nombre, unidades, precioUnidad, descripcion)
         {
+            Id = id;
             Calorias = kcal;
             Grasa = grasa;
             Azucar = azucar;

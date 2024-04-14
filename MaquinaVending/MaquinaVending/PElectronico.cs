@@ -6,28 +6,26 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class PElectronico : Producto
-    {
-        // Indicador de si el producto está por defecto cargado y listo para su uso
+    internal class PElectronico : Producto {
+        public string Tipo { get; set; }
+        public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
-        public bool Bateria { get; set; }
-
-        // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
-        
-        // Completar el constructor una vez incluidas las nuevas propiedades
 
         public PElectronico() { }
-        public PElectronico(string nombre, int unidades, double precioUnidad, string descripcion, bool precargado)
-            :base(nombre, unidades, precioUnidad, descripcion)
-        {   
+
+        public PElectronico(int id, string nombre, int unidades, double precioUnidad, string descripcion, bool incluyePilas, bool precargado)
+            : base(id, nombre, unidades, precioUnidad, descripcion) 
+        {
+            Id = id;
             Precargado = precargado;
+            IncluyePilas = incluyePilas;
         }
 
         public override string MostrarInfo() 
         {
             return $"{base.MostrarInfo()}\n" +
-                   $"Precargado: {(Precargado ? "Sí" : "No")}\n" +
-                   $"Batería: {(Bateria ? "Sí" : "No")}\n";
+                   $"¿Incluye pilas?: {(IncluyePilas ? "Sí" : "No")}\n" +
+                   $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
 
     }
