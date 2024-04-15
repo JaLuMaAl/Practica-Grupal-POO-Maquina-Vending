@@ -17,8 +17,9 @@ namespace MaquinaVending
             : base(id, nombre, unidades, precioUnidad, descripcion) 
         {
             Id = id;
-            Precargado = precargado;
             IncluyePilas = incluyePilas;
+            Precargado = precargado;
+            
         }
 
         public override string MostrarInfo() 
