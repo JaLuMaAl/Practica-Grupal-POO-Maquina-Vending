@@ -10,6 +10,7 @@ namespace MaquinaVending
     {
         public List<Producto> listaProductos;
         public ProductManager productManager;
+        public int ClaveSecreta {  get; set; }
 
         public MaquinaVending()
         {
@@ -64,30 +65,33 @@ namespace MaquinaVending
             {
                 Console.WriteLine($"{p.Id}, {p.Nombre}, {p.Unidades}, {p.PrecioUnidad}");
             }
-            Console.WriteLine("Introduce el ID del producto del que desea ver su información: ");
-            int idElegido = int.Parse(Console.ReadLine());
 
-            if(idElegido == 0)
-            {
-
-            }
-            else
-            {
-                Console.WriteLine("El ID introducido no ha sido encontrado.");
-            }
-
+            ElegirProducto();
+            pTemp.MostrarInfo();
         }
 
         // Método que permite al Admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
+            Console.WriteLine("Introduce clave secreta: ");
+            string clave = Console.ReadLine();
 
+           if(clave == )
+            {
+
+            }
         }
 
         // Método que permite al Admin reponer completamente las unidades de los productos existentes
         public void CargaCompleta()
         {
+            Console.WriteLine("Introduce clave secreta: ");
+            string clave = Console.ReadLine();
 
+            if(clave == )
+            {
+
+            }
         }
 
         // Método que guarda los datos y cierra el programa
