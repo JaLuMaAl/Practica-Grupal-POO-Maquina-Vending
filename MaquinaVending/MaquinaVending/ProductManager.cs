@@ -36,6 +36,10 @@ namespace MaquinaVending
                 {
                     pTemp = p;
                 }
+                else
+                {
+                    Console.WriteLine("No se ha encontrado un producto con el ID introducido.");
+                }
             }
 
             // Devuelvo el producto almacenado en pTemp, si no ha encontrado el producto devolverá null
