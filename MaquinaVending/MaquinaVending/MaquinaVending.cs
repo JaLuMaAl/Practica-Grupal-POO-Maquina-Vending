@@ -55,19 +55,19 @@ namespace MaquinaVending
             }
 
             Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
-            Pagar(precioTotal);
+            productManager.Pagar(precioTotal);
         }
 
         // Método que muestra la información completa de los productos
         public void MostrarInfoProductos()
         {
-            foreach(Producto p in listaProductos)
+            foreach(Producto producto in listaProductos)
             {
-                Console.WriteLine($"{p.Id}, {p.Nombre}, {p.Unidades}, {p.PrecioUnidad}");
+                Console.WriteLine($"{producto.Id}, {producto.Nombre}, {producto.Unidades}, {producto.PrecioUnidad}");
             }
 
-            ElegirProducto();
-            pTemp.MostrarInfo();
+            Producto p = productManager.ElegirProducto();
+            p.MostrarInfo();
         }
 
         // Método que permite al Admin reponer productos existentes o añadir nuevos
