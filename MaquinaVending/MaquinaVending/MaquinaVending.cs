@@ -78,12 +78,18 @@ namespace MaquinaVending
         // Método que permite al Admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
+            Console.WriteLine("Introduce clave secreta: ");
+            string clave = Console.ReadLine();
 
+           
         }
 
         // Método que permite al Admin reponer completamente las unidades de los productos existentes
         public void CargaCompleta()
         {
+            Console.WriteLine("Introduce clave secreta: ");
+            string clave = Console.ReadLine();
+
 
         }
 
