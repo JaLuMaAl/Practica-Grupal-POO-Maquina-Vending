@@ -17,7 +17,7 @@ namespace MaquinaVending
         public string Descripcion { get; set; }
 
         public Producto() { }
-        public Producto(string nombre, int unidades, double precioUnidad, string descripcion)
+        public Producto(int id, string nombre, int unidades, double precioUnidad, string descripcion)
         {
             Id = id;
             Nombre = nombre;
@@ -29,10 +29,9 @@ namespace MaquinaVending
         // Método que devuelve un string con la información del producto
         public virtual string MostrarInfo()
         {
-            return $"Id: {Id}\n" +
-                $"{Nombre}\n" +
-                $"{Unidades} unidades disponibles\n" +
-                $"{PrecioUnidad}€/unidad\n" +
+            return $"({Id}) {Nombre}" +
+                $"\n\t{Unidades} unidades disponibles" +
+                $"\n\t{PrecioUnidad}€/unidad" +
                 $"{Descripcion}\n";
         }
     }

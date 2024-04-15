@@ -8,11 +8,14 @@ namespace MaquinaVending
 {
     internal class MaquinaVending
     {
-        List<Producto> listaProductos;
+        public List<Producto> listaProductos;
+        public ProductManager productManager;
 
         public MaquinaVending()
         {
             listaProductos = new List<Producto>();
+            productManager = new ProductManager(listaProductos);
+
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -27,12 +30,12 @@ namespace MaquinaVending
 
             foreach(Producto p in listaProductos)
             {
-                Console.WriteLine(p.MostrarInfoCompra());
+                Console.WriteLine(p.MostrarInfo());
             }
 
             do
             {
-                Producto productoElegido = p.ElegirProducto();
+                Producto productoElegido = productManager.ElegirProducto();
                 carrito.Add(productoElegido);
                 precioTotal =+ productoElegido.PrecioUnidad;
                 productoElegido.Unidades--;
