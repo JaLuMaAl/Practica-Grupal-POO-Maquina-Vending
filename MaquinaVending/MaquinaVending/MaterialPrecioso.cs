@@ -15,12 +15,14 @@ namespace MaquinaVending {
         public TipoMaterialPrecioso Tipo { get; set; }
         public double PesoGramos { get; set; }
 
-        public MaterialPrecioso(string nombre, int unidades, double precioUnidad, string descripcion, TipoMaterialPrecioso tipo, double pesoGramos)
-            : base(nombre, unidades, precioUnidad, descripcion)
+        public MaterialPrecioso() { }
+        public MaterialPrecioso(int id, string nombre, int unidades, double precioUnidad, string descripcion, TipoMaterialPrecioso tipo, double pesoGramos)
+            : base(id, nombre, unidades, precioUnidad, descripcion)
         {
             Tipo = tipo;
             PesoGramos = pesoGramos;
         }
+        public MaterialPrecioso(int id) : base(id) { }
 
         public override string MostrarInfo() 
         {

@@ -26,6 +26,11 @@ namespace MaquinaVending
             Descripcion = descripcion;
         }
 
+        public Producto(int id)
+        {
+            Id = id + 1;
+        }
+
         // Método que devuelve un string con la información del producto
         public virtual string MostrarInfo()
         {

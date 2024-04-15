@@ -79,6 +79,42 @@ namespace MaquinaVending
 
         }
 
+        public void AddProduct()
+        {
+            Console.WriteLine("Qué tipo de producto desea añadir?");
+            Console.WriteLine("1. Producto electrónico");
+            Console.WriteLine("2. Producto alimenticio");
+            Console.WriteLine("3. Material precioso");
+            Console.Write("Seleccione una opción: ");
+            int opcion = int.Parse(Console.ReadLine());
 
+            switch (opcion)
+            {
+                case 1:
+                    // Creo, solicito la información necesaria y añado a la lista de productos un nuevo producto del tipo producto electrónico 
+                    PElectronico pElectronico = new PElectronico(listaProductos.Count);
+                    pElectronico.SolicitarDetalles();
+                    listaProductos.Add(pElectronico);
+                    break;
+
+                case 2:
+                    // Creo, solicito la información necesaria y añado a la lista de productos un nuevo producto del tipo producto alimenticio
+                    PAlimenticio pAlimenticio = new PAlimenticio(listaProductos.Count);
+                    pAlimenticio.SolicitarDetalles();
+                    listaProductos.Add(pAlimenticio);
+                    break;
+
+                case 3:
+                    // Creo, solicito la información necesaria y añado a la lista de productos un nuevo producto del tipo material precioso
+                    MaterialPrecioso pMaterialPrecioso = new MaterialPrecioso(listaProductos.Count);
+                    pMaterialPrecioso.SolicitarDetalles();
+                    listaProductos.Add(pMaterialPrecioso);
+                    break;
+
+                default:
+                    Console.WriteLine("Número introducido no válido");
+                    break;                        
+            }
+        }
     }
 }
