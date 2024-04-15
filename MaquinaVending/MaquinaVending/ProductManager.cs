@@ -46,23 +46,6 @@ namespace MaquinaVending
             return pTemp;
         }
 
-        public void Pagar(double precio)
-        {
-            Console.WriteLine("Métodos de pago disponible");
-            Console.Write("\t1. Tarjeta\n\t2. Efectivo");
-
-            int opcion = 0;
-
-            Console.Write("Opción: ");
-            opcion = int.Parse(Console.ReadLine());
-
-            switch (opcion)
-            {
-                case 1:
-                    PagoTarjeta(precio);
-            }
-        }
-
         public void PagoTarjeta(double precio)
         {
             Console.WriteLine("Introduce los sisguientes datos para completar la compra:");

@@ -55,7 +55,29 @@ namespace MaquinaVending
             }
 
             Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
-            productManager.Pagar(precioTotal);
+            Pagar(precioTotal);
+        }
+
+        // Método para pagar carrito
+        public void Pagar(double precio)
+        {
+            Console.WriteLine("Métodos de pago disponible");
+            Console.Write("\t1. Tarjeta\n\t2. Efectivo");
+
+            int opcion = 0;
+
+            Console.Write("Opción: ");
+            opcion = int.Parse(Console.ReadLine());
+
+            switch(opcion)
+            {
+                case 1:
+                    productManager.PagoTarjeta(precio);
+                    break;
+                case 2:
+                    productManager.PagoEfectivo(precio);
+                    break;
+            }
         }
 
         // Método que muestra la información completa de los productos
