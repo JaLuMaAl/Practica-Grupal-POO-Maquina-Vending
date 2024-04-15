@@ -77,6 +77,8 @@ namespace MaquinaVending
                 case 2:
                     productManager.PagoEfectivo(precio);
                     break;
+                default:
+                    Console.WriteLine("Opción no válida."); //Dar opción de salir o introducir opcion de nuevo
             }
         }
 
