@@ -55,18 +55,30 @@ namespace MaquinaVending
             switch (opcion)
             {
                 case 1:
-                    PagoTarjeta(precio)
+                    PagoTarjeta(precio);
             }
         }
 
-        private void PagoTarjeta(double precio)
+        public void PagoTarjeta(double precio)
+        {
+            Console.WriteLine("Introduce los sisguientes datos para completar la compra:");
+            Console.Write("Número de tarjeta: ");
+            int nTarjeta = int.Parse(Console.ReadLine());
+
+            Console.Write("Fecha de caducidad: ");
+            int fechaCaducidad = int.Parse(Console.ReadLine());
+
+            Console.Write("Código de seguridad (CVV): ");
+            int cvv = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Compra realizada con éxito por un importe de {precio}€");
+        }
+
+        public void PagoEfectivo(double precio)
         {
 
         }
 
-        private void PagoEfectivo(double precio)
-        {
 
-        }
     }
 }

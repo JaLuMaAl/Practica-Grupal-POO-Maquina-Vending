@@ -10,7 +10,11 @@ namespace MaquinaVending
     {
         static void Main(string[] args)
         {
-            Console.Write("Hola mundo");
+            // Instancio las clases MaquinaVending y ProductManager
+            MaquinaVending maquinaVending = new MaquinaVending();
+
+
+
         }
     }
 }
