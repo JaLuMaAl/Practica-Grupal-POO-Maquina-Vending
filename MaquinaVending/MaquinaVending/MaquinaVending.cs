@@ -57,6 +57,21 @@ namespace MaquinaVending
         // Método que muestra la información completa de los productos
         public void MostrarInfoProductos()
         {
+            foreach(Producto p in listaProductos)
+            {
+                Console.WriteLine($"{p.Id}, {p.Nombre}, {p.Unidades}, {p.PrecioUnidad}");
+            }
+            Console.WriteLine("Introduce el ID del producto del que desea ver su información: ");
+            int idElegido = int.Parse(Console.ReadLine());
+
+            if(idElegido == 0)
+            {
+
+            }
+            else
+            {
+                Console.WriteLine("El ID introducido no ha sido encontrado.");
+            }
 
         }
 
