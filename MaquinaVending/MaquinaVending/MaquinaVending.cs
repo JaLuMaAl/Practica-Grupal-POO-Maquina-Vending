@@ -135,12 +135,13 @@ namespace MaquinaVending
                 switch(opcion)
                 {
                     case 1:
-                        ReponerProducto();
+                        Producto pReponer = productManager.ElegirProducto();
+                        productManager.ReponerProducto(pReponer);
                         break;
                     case 2:
                         if (listaProductos.Count < numeroSlots)
                         {
-                            AddNewProduct();
+                            productManager.AddNewProduct();
                         }
                         else
                         {
