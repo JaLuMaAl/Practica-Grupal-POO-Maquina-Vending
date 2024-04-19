@@ -36,10 +36,6 @@ namespace MaquinaVending
                 {
                     pTemp = p;
                 }
-                /*else
-                {
-                    Console.WriteLine("No se ha encontrado un producto con el ID introducido.");
-                }*/
             }
 
             // Devuelvo el producto almacenado en pTemp, si no ha encontrado el producto devolverá null
@@ -66,7 +62,7 @@ namespace MaquinaVending
 
         }
 
-        public void AddProduct()
+        public void AddNewProduct()
         {
             Console.WriteLine("Qué tipo de producto desea añadir?");
             Console.WriteLine("1. Producto electrónico");
@@ -100,7 +96,15 @@ namespace MaquinaVending
 
                 default:
                     Console.WriteLine("Número introducido no válido");
-                    break;                        
+                    break;  
+            }
+        }
+
+        public void ReponerProducto(Producto producto)
+        {
+            if (producto.UnidadesDisponibles < producto.UnidadesMax)
+            {
+
             }
         }
     }
