@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace MaquinaVending
         {
             listaProductos = new List<Producto>();
             productManager = new ProductManager(listaProductos);
-
+            // La clave secreta esta predeterminada por los creadores del programa
+            ClaveSecreta = 247209; 
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -81,6 +83,7 @@ namespace MaquinaVending
                     break;
                 default:
                     Console.WriteLine("Opción no válida."); //Dar opción de salir o introducir opcion de nuevo
+                    break;
             }
         }
 
@@ -99,11 +102,18 @@ namespace MaquinaVending
         // Método que permite al Admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
-            Console.WriteLine("Introduce clave secreta: ");
-            string clave = Console.ReadLine();
+            int numeroSlots = 12;
 
-           if(clave == )
-           {
+            bool accesoAdmin = CheckAdmin();
+
+            if (accesoAdmin)
+            {
+                int opcion;
+
+                Console.WriteLine("");
+            }
+            else
+            {
 
            }
         }
@@ -111,10 +121,13 @@ namespace MaquinaVending
         // Método que permite al Admin reponer completamente las unidades de los productos existentes
         public void CargaCompleta()
         {
-            Console.WriteLine("Introduce clave secreta: ");
-            string clave = Console.ReadLine();
+            bool accesoAdmin = CheckAdmin();
 
-            if(clave == )
+            if (accesoAdmin)
+            {
+
+            }
+            else
             {
 
             }
@@ -124,6 +137,22 @@ namespace MaquinaVending
         public void SalirGuardar()
         {
 
+        }
+
+        // Método para comprobar si clave secreta es correcta
+        private bool CheckAdmin()
+        {
+            bool check = false;
+
+            Console.WriteLine("Introduce clave secreta: ");
+            int clave = int.Parse(Console.ReadLine());
+
+            if (clave == ClaveSecreta)
+            {
+                Console.WriteLine("Clave secreta correcta. Bienvenido Admin.");
+                check = true;
+            }
+            return check;
         }
     }
 }
