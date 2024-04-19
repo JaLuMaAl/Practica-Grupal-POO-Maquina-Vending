@@ -11,6 +11,8 @@ namespace MaquinaVending
         public List<Producto> listaProductos;
         public ProductManager productManager;
         public int ClaveSecreta {  get; set; }
+        public string path {  get; set; }
+
 
         public MaquinaVending()
         {
@@ -101,9 +103,9 @@ namespace MaquinaVending
             string clave = Console.ReadLine();
 
            if(clave == )
-            {
+           {
 
-            }
+           }
         }
 
         // Método que permite al Admin reponer completamente las unidades de los productos existentes
