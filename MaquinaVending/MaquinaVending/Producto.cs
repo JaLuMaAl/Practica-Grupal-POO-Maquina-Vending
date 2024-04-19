@@ -33,7 +33,8 @@ namespace MaquinaVending
             Id = id + 1;
         }
 
-        public virtual string MostrarInfoParcial() {
+        public string MostrarInfoParcial()
+        {
             return $"({Id}) {Nombre}\n" +
                 $"{UnidadesDisponibles} unidades disponibles\n" +
                 $"{PrecioUnidad}€/unidad";
@@ -48,7 +49,8 @@ namespace MaquinaVending
                 $"{Descripcion}\n";
         }
 
-        public virtual void SolicitarDetalles() {
+        public virtual void SolicitarDetalles()
+        {
             Console.WriteLine("Introduce el nombre");
             Nombre = Console.ReadLine();
             Console.WriteLine("Introduce en número de unidades");

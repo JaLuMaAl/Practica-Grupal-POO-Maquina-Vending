@@ -11,16 +11,18 @@ namespace MaquinaVending
     {
         public List<Producto> listaProductos;
         public ProductManager productManager;
-        public int ClaveSecreta {  get; set; }
-        public string path {  get; set; }
 
+        // Clave secreta que debe introducir el administrador de la máquina para poder acceder sus funcionalidades exclusivas
+        public int ClaveSecreta {  get; set; }
+        // Ruta del archivo que almacena los productos y su información
+        public string path {  get; set; }
 
         public MaquinaVending()
         {
             listaProductos = new List<Producto>();
             productManager = new ProductManager(listaProductos);
-            // La clave secreta esta predeterminada por los creadores del programa
-            ClaveSecreta = 247209; 
+            // Establecemos la clave secreta del admin internamente en el programa, se supone que como es el admin debe conocerla
+            ClaveSecreta = 247209;
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -31,6 +33,7 @@ namespace MaquinaVending
             int opcion = 0;
             double precioTotal = 0;
 
+            // Comprobamos si la máquina expendedora contiene productos
             if (listaProductos.Count == 0)
             {
                 Console.WriteLine("La máquina no contiene productos.");
@@ -71,19 +74,22 @@ namespace MaquinaVending
                     }
                 } while (opcion == 1);
 
-                Console.WriteLine("Tu carrito incluye:");
-
-                foreach (Producto p in carrito)
+                if (carrito.Count > 0)
                 {
-                    Console.WriteLine($"{p.Nombre}");
-                }
+                    Console.WriteLine("Tu carrito incluye:");
 
-                Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
-                Pagar(precioTotal);
+                    foreach (Producto p in carrito)
+                    {
+                        Console.WriteLine($"{p.Nombre}");
+                    }
+
+                    Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
+                    Pagar(precioTotal);
+                }
             }
         }
 
-        // Método para pagar carrito
+        // Método para pagar el carrito
         private void Pagar(double precio)
         {
             Console.WriteLine("Métodos de pago disponible");
@@ -136,8 +142,16 @@ namespace MaquinaVending
                 {
                     case 1:
                         Producto pReponer = productManager.ElegirProducto();
-                        productManager.ReponerProducto(pReponer);
+                        if (pReponer != null)
+                        {
+                            productManager.ReponerProducto(pReponer);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID de producto no encontrado");
+                        }
                         break;
+
                     case 2:
                         if (listaProductos.Count < numeroSlots)
                         {
@@ -148,10 +162,15 @@ namespace MaquinaVending
                             Console.WriteLine("La capacidad de la máquina esta llena. No se pueden añadir productos.");
                         }
                         break;
+
                     default:
                         Console.WriteLine("Opción no válida.");
                         break;
                 }
+            }
+            else
+            {
+                Console.WriteLine("Acceso denegado, clave incorrecta");
             }
         }
 
@@ -166,14 +185,16 @@ namespace MaquinaVending
             }
         }
 
-        // Método para comprobar si clave secreta es correcta
+        // Método que compureba si clave secreta introducida por el usuario es correcta, para permitir el acceso a las funciones de administrador
         private bool CheckAdmin()
         {
             bool check = false;
 
+            // Solicito la clave secreta al usuario
             Console.WriteLine("Introduce clave secreta: ");
             int clave = int.Parse(Console.ReadLine());
 
+            // Comparo la clave del usuario con la clave secreta establecida
             if (clave == ClaveSecreta)
             {
                 Console.WriteLine("Clave secreta correcta. Bienvenido Admin.");

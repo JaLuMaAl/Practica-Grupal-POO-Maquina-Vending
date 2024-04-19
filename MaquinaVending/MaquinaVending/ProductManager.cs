@@ -100,11 +100,21 @@ namespace MaquinaVending
             }
         }
 
+
+        // Método que recibe un producto y establece sus unidades disponibles a sus unidades máximas
         public void ReponerProducto(Producto producto)
         {
+            // Compruebo que las unidades disponibles del producto recibido son menores a las máximas
             if (producto.UnidadesDisponibles < producto.UnidadesMax)
             {
-                producto.SolicitarDetalles();
+                // Igualo las unidades disponibles a las unidades máximas, repongo las unidades del producto
+                producto.UnidadesDisponibles = producto.UnidadesMax;
+                Console.WriteLine($"Se han repuesto todas las unidades del producto {producto.Nombre}");
+            }
+            else
+            {
+                // No puedo reponer el producto porque no hay unidades que reponer, sus unidades máximas son iguales a las disponibles
+                Console.WriteLine($"No se puede reponer el producto: {producto.Nombre}. Su capacidad se encuentra al completo ");
             }
         }
     }
