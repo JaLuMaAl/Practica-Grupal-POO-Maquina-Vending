@@ -39,7 +39,7 @@ namespace MaquinaVending
 
                 foreach (Producto p in listaProductos)
                 {
-                    Console.WriteLine(p.MostrarInfo());
+                    Console.WriteLine(p.MostrarInfoParcial());
                 }
 
                 do
@@ -48,13 +48,20 @@ namespace MaquinaVending
 
                     if (productoElegido != null)
                     {
-                        carrito.Add(productoElegido);
-                        precioTotal = +productoElegido.PrecioUnidad;
-                        productoElegido.UnidadesDisponibles--;
-                        Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
+                        if (productoElegido.UnidadesDisponibles > 0)
+                        {
+                            carrito.Add(productoElegido);
+                            precioTotal = +productoElegido.PrecioUnidad;
+                            productoElegido.UnidadesDisponibles--;
+                            Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
 
-                        Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
-                        opcion = int.Parse(Console.ReadLine());
+                            Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
+                            opcion = int.Parse(Console.ReadLine());
+                        }
+                        else
+                        {
+                            Console.WriteLine("No hay unidades disponibles de este producto.");
+                        }
                     }
                     else
                     {
@@ -152,14 +159,8 @@ namespace MaquinaVending
 
             if (accesoAdmin)
             {
-
+                // Reponer todos los productos
             }
-        }
-
-        // Método que guarda los datos y cierra el programa
-        public void SalirGuardar()
-        {
-
         }
 
         // Método para comprobar si clave secreta es correcta
@@ -180,6 +181,12 @@ namespace MaquinaVending
                 Console.WriteLine("Clave secreta incorrecta.");
             }
             return check;
+        }
+
+        // Método que guarda los datos y cierra el programa
+        public void SalirGuardar()
+        {
+
         }
     }
 }
