@@ -87,11 +87,11 @@ namespace MaquinaVending
         {
             foreach(Producto producto in listaProductos)
             {
-                Console.WriteLine($"{producto.Id}, {producto.Nombre}, {producto.Unidades}, {producto.PrecioUnidad}");
+                Console.WriteLine(producto.MostrarInfoParcial());
             }
 
             Producto p = productManager.ElegirProducto();
-            p.MostrarInfo();
+            p.MostrarInfoParcial();
         }
 
         // Método que permite al Admin reponer productos existentes o añadir nuevos

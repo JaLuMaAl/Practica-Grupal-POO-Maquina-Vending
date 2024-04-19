@@ -11,26 +11,30 @@ namespace MaquinaVending
         public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
 
-        // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
-        
-        // Completar el constructor una vez incluidas las nuevas propiedades
-
         public PElectronico() { }
-        public PElectronico(string nombre, int unidades, double precioUnidad, string descripcion, bool precargado)
-            :base(nombre, unidades, precioUnidad, descripcion)
-        {   
+        public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,bool incluyePilas, bool precargado)
+            :base(id,nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
+        {
+            IncluyePilas = incluyePilas;
             Precargado = precargado;
             
         }
 
         public PElectronico(int id):base(id) { }
 
-        public override string MostrarInfo() 
+        public override string MostrarInfoTotal() 
         {
-            return $"{base.MostrarInfo()}\n" +
+            return $"{base.MostrarInfoTotal()}\n" +
                    $"¿Incluye pilas?: {(IncluyePilas ? "Sí" : "No")}\n" +
                    $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
 
+        public override void SolicitarDetalles() {
+            base.SolicitarDetalles();
+            Console.WriteLine("Introduzca (1) si el producto incluye pilas y (0) si el producto no incluye pilas");
+            IncluyePilas = Console.ReadLine();
+            Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
+            PesoGramos = int.Parse(Console.ReadLine());
+        }
     }
 }

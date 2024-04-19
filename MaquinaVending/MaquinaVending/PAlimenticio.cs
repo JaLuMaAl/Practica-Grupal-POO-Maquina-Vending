@@ -14,8 +14,8 @@ namespace MaquinaVending
         public int Azucar {  get; set; }
 
         public PAlimenticio() { } 
-        public PAlimenticio(int id,string nombre, int unidades, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
-            :base(id,nombre, unidades, precioUnidad, descripcion)
+        public PAlimenticio(int id,string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
+            :base(id,nombre, unidadesMax,unidadesDisponibles, precioUnidad, descripcion)
         {
             Id = id;
             Calorias = kcal;
@@ -25,12 +25,22 @@ namespace MaquinaVending
 
         public PAlimenticio(int id) : base(id) { }
 
-        public override string MostrarInfo()
+        public override string MostrarInfoTotal()
         {
-            return $"{base.MostrarInfo()}\n" +
+            return $"{base.MostrarInfoTotal()}\n" +
                 $"\nCalorías: {Calorias} kcal\n" +
                 $"Grasa: {Grasa}g\n" +
                 $"Azucar: {Azucar}g\n";
+        }
+
+        public override void SolicitarDetalles() { 
+            base.SolicitarDetalles();
+            Console.WriteLine("Introduzca la cantidad de calorías que contiene el producto");
+            Calorias = int.Parse(Console.ReadLine());
+            Console.WriteLine("Introduzca la cantidad de grasa en gramos");
+            Grasa = int.Parse(Console.ReadLine());
+            Console.WriteLine("Introduzca la cantidad de azúcar en gramos");
+            Azucar = int.Parse(Console.ReadLine());
         }
     }
 }
