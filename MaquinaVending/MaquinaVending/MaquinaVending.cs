@@ -63,7 +63,7 @@ namespace MaquinaVending
         }
 
         // Método para pagar carrito
-        public void Pagar(double precio)
+        private void Pagar(double precio)
         {
             Console.WriteLine("Métodos de pago disponible");
             Console.Write("\t1. Tarjeta\n\t2. Efectivo");
