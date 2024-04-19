@@ -104,7 +104,7 @@ namespace MaquinaVending
         {
             if (producto.UnidadesDisponibles < producto.UnidadesMax)
             {
-
+                producto.SolicitarDetalles();
             }
         }
     }
