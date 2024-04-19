@@ -13,6 +13,8 @@ namespace MaquinaVending
         public int Clave { get; set; }
 
         public Admin() { }
+
+        // A la hora de instanciar el admin introduzco la clave manualmente 
         public Admin(int clave)
         {
             Clave = clave;

@@ -11,16 +11,19 @@ namespace MaquinaVending
         public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
 
-        public PElectronico() { }
+        // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
+        
+        // Completar el constructor una vez incluidas las nuevas propiedades
 
-        public PElectronico(int id, string nombre, int unidades, double precioUnidad, string descripcion, bool incluyePilas, bool precargado)
-            : base(id, nombre, unidades, precioUnidad, descripcion) 
-        {
-            Id = id;
-            IncluyePilas = incluyePilas;
+        public PElectronico() { }
+        public PElectronico(string nombre, int unidades, double precioUnidad, string descripcion, bool precargado)
+            :base(nombre, unidades, precioUnidad, descripcion)
+        {   
             Precargado = precargado;
             
         }
+
+        public PElectronico(int id):base(id) { }
 
         public override string MostrarInfo() 
         {

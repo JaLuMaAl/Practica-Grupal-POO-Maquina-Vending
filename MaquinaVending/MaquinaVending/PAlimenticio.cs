@@ -23,6 +23,8 @@ namespace MaquinaVending
             Azucar = azucar;
         }
 
+        public PAlimenticio(int id) : base(id) { }
+
         public override string MostrarInfo()
         {
             return $"{base.MostrarInfo()}\n" +
