@@ -6,31 +6,35 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class PElectronico : Producto
-    {
-        // Indicador de si el producto está por defecto cargado y listo para su uso
+    internal class PElectronico : Producto {
+        public string Tipo { get; set; }
+        public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
-        public bool Bateria { get; set; }
-
-        // Añadir si hacen falta pilas o batería (bool), y los materiales utilizados (no se si sería un string, un enum o una lista)
-        
-        // Completar el constructor una vez incluidas las nuevas propiedades
 
         public PElectronico() { }
-        public PElectronico(int id, string nombre, int unidades, double precioUnidad, string descripcion, bool precargado)
-            :base(id, nombre, unidades, precioUnidad, descripcion)
-        {   
+        public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,bool incluyePilas, bool precargado)
+            :base(id,nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
+        {
+            IncluyePilas = incluyePilas;
             Precargado = precargado;
+            
         }
 
         public PElectronico(int id):base(id) { }
 
-        public override string MostrarInfo() 
+        public override string MostrarInfoTotal() 
         {
-            return $"{base.MostrarInfo()}\n" +
-                   $"Precargado: {(Precargado ? "Sí" : "No")}\n" +
-                   $"Batería: {(Bateria ? "Sí" : "No")}\n";
+            return $"{base.MostrarInfoTotal()}\n" +
+                   $"¿Incluye pilas?: {(IncluyePilas ? "Sí" : "No")}\n" +
+                   $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
 
+        public override void SolicitarDetalles() {
+            base.SolicitarDetalles();
+            Console.WriteLine("Introduzca (1) si el producto incluye pilas y (0) si el producto no incluye pilas");
+            IncluyePilas = Console.ReadLine();
+            Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
+            PesoGramos = int.Parse(Console.ReadLine());
+        }
     }
 }
