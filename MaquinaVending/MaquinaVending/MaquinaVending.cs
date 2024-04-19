@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace MaquinaVending
         {
             listaProductos = new List<Producto>();
             productManager = new ProductManager(listaProductos);
-
+            // La clave secreta esta predeterminada por los creadores del programa
+            ClaveSecreta = 247209; 
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -27,35 +29,49 @@ namespace MaquinaVending
             int opcion = 0;
             double precioTotal = 0;
 
-            Console.WriteLine(" --- PRODUCTOS DISPONIBLES ---");
-
-            foreach(Producto p in listaProductos)
+            if (listaProductos.Count == 0)
             {
-                Console.WriteLine(p.MostrarInfo());
+                Console.WriteLine("La máquina no contiene productos.");
             }
-
-            do
+            else
             {
-                Producto productoElegido = productManager.ElegirProducto();
-                carrito.Add(productoElegido);
-                precioTotal =+ productoElegido.PrecioUnidad;
-                productoElegido.Unidades--;
-                Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
+                Console.WriteLine(" --- PRODUCTOS DISPONIBLES ---");
 
-                Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
-                opcion = int.Parse(Console.ReadLine());
+                foreach (Producto p in listaProductos)
+                {
+                    Console.WriteLine(p.MostrarInfo());
+                }
 
-            } while (opcion == 1);
+                do
+                {
+                    Producto productoElegido = productManager.ElegirProducto();
 
-            Console.WriteLine("Tu carrito incluye:");
+                    if (productoElegido != null)
+                    {
+                        carrito.Add(productoElegido);
+                        precioTotal = +productoElegido.PrecioUnidad;
+                        productoElegido.UnidadesDisponibles--;
+                        Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
 
-            foreach(Producto p in carrito)
-            {
-                Console.WriteLine($"{p.Nombre}");
+                        Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
+                        opcion = int.Parse(Console.ReadLine());
+                    }
+                    else
+                    {
+                        Console.WriteLine("El producto con el ID introducido no esta disponible.");
+                    }
+                } while (opcion == 1);
+
+                Console.WriteLine("Tu carrito incluye:");
+
+                foreach (Producto p in carrito)
+                {
+                    Console.WriteLine($"{p.Nombre}");
+                }
+
+                Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
+                Pagar(precioTotal);
             }
-
-            Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
-            Pagar(precioTotal);
         }
 
         // Método para pagar carrito
@@ -79,6 +95,7 @@ namespace MaquinaVending
                     break;
                 default:
                     Console.WriteLine("Opción no válida."); //Dar opción de salir o introducir opcion de nuevo
+                    break;
             }
         }
 
@@ -97,22 +114,43 @@ namespace MaquinaVending
         // Método que permite al Admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
-            Console.WriteLine("Introduce clave secreta: ");
-            string clave = Console.ReadLine();
+            int numeroSlots = 12;
+            bool accesoAdmin = CheckAdmin();
 
-           if(clave == )
+            if (accesoAdmin)
             {
+                Console.WriteLine("Desea reponer o añadir productos?");
+                Console.WriteLine("1: Reponer\n2: Añadir");
+                int opcion = int.Parse(Console.ReadLine());
 
+                switch(opcion)
+                {
+                    case 1:
+                        ReponerProducto();
+                        break;
+                    case 2:
+                        if (listaProductos.Count < numeroSlots)
+                        {
+                            AddNewProduct();
+                        }
+                        else
+                        {
+                            Console.WriteLine("La capacidad de la máquina esta llena. No se pueden añadir productos.");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
             }
         }
 
         // Método que permite al Admin reponer completamente las unidades de los productos existentes
         public void CargaCompleta()
         {
-            Console.WriteLine("Introduce clave secreta: ");
-            string clave = Console.ReadLine();
+            bool accesoAdmin = CheckAdmin();
 
-            if(clave == )
+            if (accesoAdmin)
             {
 
             }
@@ -122,6 +160,26 @@ namespace MaquinaVending
         public void SalirGuardar()
         {
 
+        }
+
+        // Método para comprobar si clave secreta es correcta
+        private bool CheckAdmin()
+        {
+            bool check = false;
+
+            Console.WriteLine("Introduce clave secreta: ");
+            int clave = int.Parse(Console.ReadLine());
+
+            if (clave == ClaveSecreta)
+            {
+                Console.WriteLine("Clave secreta correcta. Bienvenido Admin.");
+                check = true;
+            }
+            else if (clave != ClaveSecreta)
+            {
+                Console.WriteLine("Clave secreta incorrecta.");
+            }
+            return check;
         }
     }
 }
