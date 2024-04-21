@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,15 +8,15 @@ using System.Threading.Tasks;
 namespace MaquinaVending
 {
     internal class PElectronico : Producto {
-        public string Tipo { get; set; }
+        public string Materiales { get; set; }
         public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
 
         public PElectronico() { }
-        public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,string tipo, bool incluyePilas, bool precargado)
+        public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,string materiales, bool incluyePilas, bool precargado)
             :base(id,nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
         {
-            Tipo = tipo;
+            Materiales = materiales;
             IncluyePilas = incluyePilas;
             Precargado = precargado;
             
@@ -26,7 +27,7 @@ namespace MaquinaVending
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}\n" +
-                   $"Tipo: {Tipo}"+
+                   $"Materiales empleados: {Materiales}"+
                    $"¿Incluye pilas?: {(IncluyePilas ? "Sí" : "No")}\n" +
                    $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
@@ -34,8 +35,8 @@ namespace MaquinaVending
         public override void SolicitarDetalles() {
             base.SolicitarDetalles(); // Solicitar detalles generales del producto
 
-            Console.WriteLine("Introduzca el tipo de material:");
-            Tipo = Console.ReadLine();
+            Console.WriteLine("Introduzca los materiales utilizados en la fabricación del producto:");
+            Materiales = Console.ReadLine();
 
             bool opcionValida = false;
 
@@ -80,6 +81,11 @@ namespace MaquinaVending
                         break;
                 }
             } while (!opcionValida);
+        }
+
+        public override string ToFile()
+        {
+            return $"3;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
         }
 
     }

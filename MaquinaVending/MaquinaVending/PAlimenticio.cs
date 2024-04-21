@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,11 @@ namespace MaquinaVending
             Grasa = int.Parse(Console.ReadLine());
             Console.WriteLine("Introduzca la cantidad de azúcar en gramos");
             Azucar = int.Parse(Console.ReadLine());
+        }
+
+        public override string ToFile()
+        {
+            return $"2;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
         }
     }
 }

@@ -14,8 +14,7 @@ namespace MaquinaVending
 
         // Clave secreta que debe introducir el administrador de la máquina para poder acceder sus funcionalidades exclusivas
         public int ClaveSecreta {  get; set; }
-        // Ruta del archivo que almacena los productos y su información
-        public string path {  get; set; }
+        
 
         public MaquinaVending()
         {

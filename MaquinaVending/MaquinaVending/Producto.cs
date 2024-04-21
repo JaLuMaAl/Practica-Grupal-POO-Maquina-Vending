@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class Producto
+    internal abstract class Producto
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -62,5 +63,7 @@ namespace MaquinaVending
             Console.WriteLine("Introduzca una descripción sobre el producto");
             Descripcion = Console.ReadLine();
         }
+
+        public abstract string SaveInfo();
     }
 }

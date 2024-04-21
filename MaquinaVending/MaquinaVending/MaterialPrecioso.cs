@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,6 +33,10 @@ namespace MaquinaVending {
             Tipo = Console.ReadLine();
             Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
             PesoGramos= int.Parse(Console.ReadLine());
+        }
+        public override string ToFile()
+        {
+            return $"1;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Tipo};{PesoGramos};;;;;";
         }
 
     }

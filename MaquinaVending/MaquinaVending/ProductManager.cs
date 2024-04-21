@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,9 @@ namespace MaquinaVending
     {
         public List<Producto> listaProductos;
 
+        // Ruta del archivo que almacena los productos y su información
+        public string path { get; set; }
+
         // Constructor vacío
         public ProductManager() { }
         
@@ -18,6 +23,7 @@ namespace MaquinaVending
         public ProductManager(List<Producto> listaP)
         {
             listaProductos = listaP;
+            path = "productos.csv";
         }
 
         // Solicita un ID y recorre la lista de productos en busca de un producto cuyo ID coincida con el introducido
@@ -116,6 +122,43 @@ namespace MaquinaVending
                 // No puedo reponer el producto porque no hay unidades que reponer, sus unidades máximas son iguales a las disponibles
                 Console.WriteLine($"No se puede reponer el producto: {producto.Nombre}. Su capacidad se encuentra al completo ");
             }
+        }
+
+        public void GuardarProductosArchivo()
+        {
+            if (File.Exists(path))
+            {
+                // Abro el archivo productos.csv en modo escritura sobreescribiendo su contenido
+                using (StreamWriter sw = new StreamWriter("productos.csv", false))
+                {
+                    foreach (Producto p in listaProductos)
+                    {
+                        sw.WriteLine(p.SaveInfo());
+                    }
+                }
+            }
+            else
+            {
+                File.Create(path).Close();
+            }
+        }
+
+        public void CargaProductosArchivo()
+        {
+            if (File.Exists(path))
+            {
+                string line = "";
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    string header = sr.ReadLine();
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] datos = line.Split(";");
+                    }
+                }
+            }
+            
         }
     }
 }
