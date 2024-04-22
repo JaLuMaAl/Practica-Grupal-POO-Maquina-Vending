@@ -9,13 +9,14 @@ namespace MaquinaVending
 {
     internal class MaquinaVending
     {
+        // Creamos una lista de productos y un objeto de la clase ProductManager
         public List<Producto> listaProductos;
         public ProductManager productManager;
 
-        // Clave secreta que debe introducir el administrador de la máquina para poder acceder sus funcionalidades exclusivas
+        // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
         public int ClaveSecreta {  get; set; }
         
-
+        // Constructor parametrizado
         public MaquinaVending()
         {
             listaProductos = new List<Producto>();
@@ -27,6 +28,7 @@ namespace MaquinaVending
         // Método encargado de proceso de compra de los productos 
         public void ComprarProductos()
         {
+            // Creamos una lista de tipo Producto llamada 'carrito'
             List<Producto> carrito = new List<Producto>();
 
             int opcion = 0;
@@ -35,6 +37,7 @@ namespace MaquinaVending
             // Comprobamos si la máquina expendedora contiene productos
             if (listaProductos.Count == 0)
             {
+                // Si la máquina esta vacia, no se pueden comprar productos
                 Console.WriteLine("La máquina no contiene productos.");
             }
             else
@@ -93,6 +96,7 @@ namespace MaquinaVending
         {
             Console.WriteLine("Métodos de pago disponible");
             Console.Write("\t1. Tarjeta\n\t2. Efectivo");
+            Console.WriteLine("Cancelar operación");
 
             int opcion = 0;
 
@@ -106,6 +110,9 @@ namespace MaquinaVending
                     break;
                 case 2:
                     productManager.PagoEfectivo(precio);
+                    break;
+                case 3:
+                    SalirGuardar(); // comprobar
                     break;
                 default:
                     Console.WriteLine("Opción no válida."); //Dar opción de salir o introducir opcion de nuevo
