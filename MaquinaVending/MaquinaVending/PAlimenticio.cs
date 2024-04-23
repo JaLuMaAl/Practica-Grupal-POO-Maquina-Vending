@@ -44,7 +44,7 @@ namespace MaquinaVending
             Azucar = int.Parse(Console.ReadLine());
         }
 
-        public override string ToFile()
+        public override string SaveInfo()
         {
             return $"2;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
         }

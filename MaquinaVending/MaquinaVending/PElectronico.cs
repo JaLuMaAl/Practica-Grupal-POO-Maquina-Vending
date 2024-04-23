@@ -83,7 +83,7 @@ namespace MaquinaVending
             } while (!opcionValida);
         }
 
-        public override string ToFile()
+        public override string SaveInfo()
         {
             return $"3;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
         }

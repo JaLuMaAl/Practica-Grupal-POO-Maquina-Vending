@@ -34,7 +34,7 @@ namespace MaquinaVending {
             Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
             PesoGramos= int.Parse(Console.ReadLine());
         }
-        public override string ToFile()
+        public override string SaveInfo()
         {
             return $"1;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Tipo};{PesoGramos};;;;;";
         }

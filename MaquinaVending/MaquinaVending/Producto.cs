@@ -65,7 +65,5 @@ namespace MaquinaVending
         }
 
         public abstract string SaveInfo();
-
-        public abstract string ToFile();
     }
 }
