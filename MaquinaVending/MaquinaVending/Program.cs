@@ -10,22 +10,25 @@ namespace MaquinaVending
     {
         static void Main(string[] args)
         {
-            // Instancio las clases MaquinaVending y ProductManager
+            // Instancio un objeto de la clase MaquinaVending
             MaquinaVending maquinaVending = new MaquinaVending();
 
             int opcion = 0;
 
+            // Se muestra un menú que permite al usuario introducir un número para seleccionar la acción que desea realizar
             do
             {
+                Console.Clear();
+
                 Console.WriteLine(" --- MÁQUINA VENDING UFV --- ");
                 Console.WriteLine("1. Comprar Productos");
                 Console.WriteLine("2. Mostrar información de Producto");
                 Console.WriteLine("3. Carga individual de Productos");
                 Console.WriteLine("4. Carga completa de Productos");
                 Console.WriteLine("5. Salir");
-                Console.WriteLine("Seleccione una opción: ");
+                Console.Write("Seleccione una opción: ");
                 opcion = int.Parse(Console.ReadLine());
-
+                
                 switch(opcion)
                 {
                     case 1: 
@@ -47,6 +50,9 @@ namespace MaquinaVending
                         Console.WriteLine("Opción no válida.");
                         break;
                 }
+
+                Console.WriteLine("Pulsa para continuar...");
+                Console.ReadKey();
 
             } while (opcion != 5);
 
