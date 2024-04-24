@@ -35,12 +35,28 @@ namespace MaquinaVending {
         }
 
         // Método para solicitar detalles de productos tipo material precioso
-        public override void SolicitarDetalles() {
-            base.SolicitarDetalles();
-            Console.WriteLine("Introduzca el tipo de material: ");
-            TipoMaterial = Console.ReadLine();
-            Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
-            PesoGramos= int.Parse(Console.ReadLine());
+        public override bool SolicitarDetalles() 
+        {
+            bool ejecucionCompletada = base.SolicitarDetalles(); // Solicitar detalles comunes
+
+            if (ejecucionCompletada) 
+            {
+                try 
+                {
+                    base.SolicitarDetalles();
+                    Console.WriteLine("Introduzca el tipo de material: ");
+                    TipoMaterial = Console.ReadLine();
+                    Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
+                    PesoGramos = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException) 
+                {
+                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de productos alimenticios.");
+                    ejecucionCompletada = false; // Marcar ejecución como no completada en caso de error
+                }
+            }
+
+            return ejecucionCompletada;
         }
 
         // Método que devuelve información sobre productos de tipo material precioso para guardar en un archivo csv

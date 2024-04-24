@@ -18,7 +18,8 @@ namespace MaquinaVending {
 
         // Constructor vacío
         public Producto() { }
-        public Producto(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion) {
+        public Producto(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion) 
+        {
             Id = id;
             Nombre = nombre;
             UnidadesMax = unidadesMax;
@@ -27,19 +28,22 @@ namespace MaquinaVending {
             Descripcion = descripcion;
         }
 
-        public Producto(int id) {
+        public Producto(int id) 
+        {
             Id = id + 1;
         }
 
         //Mostrar información sobre el producto
-        public string MostrarInfoParcial() {
+        public string MostrarInfoParcial() 
+        {
             return $"({Id}) {Nombre}\n" +
                 $"{UnidadesDisponibles} unidades disponibles\n" +
                 $"{PrecioUnidad}€/unidad";
         }
 
         // Método que devuelve un string con la información del producto
-        public virtual string MostrarInfoTotal() {
+        public virtual string MostrarInfoTotal()
+        {
             return $"({Id}) {Nombre}\n" +
                 $"{UnidadesDisponibles} unidades disponibles\n" +
                 $"{PrecioUnidad}€/unidad\n" +
@@ -47,26 +51,35 @@ namespace MaquinaVending {
         }
 
         // Método que solicita los detalles del producto
-        public virtual bool SolicitarDetalles() {
-                try {
-                    Console.WriteLine("Introduce el nombre");
-                    Nombre = Console.ReadLine();
+        public virtual bool SolicitarDetalles() 
+        {
+            bool ejecucionCompletada = false;
 
-                    Console.WriteLine("Introduce un número de unidades máximo");
-                    UnidadesMax = int.Parse(Console.ReadLine());
+            try 
+            {
+                Console.WriteLine("Introduce el nombre");
+                Nombre = Console.ReadLine();
 
-                    Console.WriteLine("Introduce un número de unidades");
-                    UnidadesDisponibles = int.Parse(Console.ReadLine());
+                Console.WriteLine("Introduce un número de unidades máximo");
+                UnidadesMax = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Introduzca el precio de unidad");
-                    PrecioUnidad = double.Parse(Console.ReadLine());
+                Console.WriteLine("Introduce un número de unidades");
+                UnidadesDisponibles = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Introduzca una descripción sobre el producto");
-                    Descripcion = Console.ReadLine();
-                }
-                catch (FormatException) {
-                    Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
-                }
+                Console.WriteLine("Introduzca el precio de unidad");
+                PrecioUnidad = double.Parse(Console.ReadLine());
+
+                Console.WriteLine("Introduzca una descripción sobre el producto");
+                Descripcion = Console.ReadLine();
+                ejecucionCompletada = true;
+               
+            }
+            catch (FormatException) 
+            {
+                Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
+            }
+
+            return ejecucionCompletada;
         }
         public abstract string SaveInfo();
     }

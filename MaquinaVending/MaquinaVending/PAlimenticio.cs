@@ -39,17 +39,33 @@ namespace MaquinaVending
         }
 
         // Método para solicitar detalles de productos alimenticios
-        public override void SolicitarDetalles() 
-        { 
-            base.SolicitarDetalles();
+        public override bool SolicitarDetalles() 
+        {
+            bool ejecucionCompletada = base.SolicitarDetalles(); // Solicitar detalles comunes
 
-            Console.Write("Introduzca la cantidad de calorías que contiene el producto: ");
-            Calorias = int.Parse(Console.ReadLine());
-            Console.Write("Introduzca la cantidad de grasa en gramos: ");
-            Grasa = int.Parse(Console.ReadLine());
-            Console.Write("Introduzca la cantidad de azúcar en gramos: ");
-            Azucar = int.Parse(Console.ReadLine());
+            if (ejecucionCompletada) 
+            {
+                try 
+                {
+                    Console.WriteLine("Introduce las calorías");
+                    Calorias = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Introduce la cantidad de grasa (en gramos)");
+                    Grasa = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Introduce la cantidad de azúcar (en gramos)");
+                    Azucar = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException) 
+                {
+                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de productos alimenticios.");
+                    ejecucionCompletada = false; // Marcar ejecución como no completada en caso de error
+                }
+            }
+
+            return ejecucionCompletada;
         }
+
 
         // Método que devuelve información sobre productos alimenticios para guardar en un archivo csv
         public override string SaveInfo()
