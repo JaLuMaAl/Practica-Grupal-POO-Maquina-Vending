@@ -13,8 +13,6 @@ namespace MaquinaVending
         public string Nombre { get; set; }
         public int UnidadesMax { get; set; }
         public int UnidadesDisponibles { get; set; }
-        
-        // Precio por unidad del producto
         public double PrecioUnidad { get; set; }
         public string Descripcion { get; set; }
 
@@ -34,6 +32,7 @@ namespace MaquinaVending
             Id = id + 1;
         }
 
+        //Mostrar información sobre el producto
         public string MostrarInfoParcial()
         {
             return $"({Id}) {Nombre}\n" +
@@ -50,20 +49,38 @@ namespace MaquinaVending
                 $"{Descripcion}\n";
         }
 
-        public virtual void SolicitarDetalles()
-        {
-            Console.WriteLine("Introduce el nombre");
-            Nombre = Console.ReadLine();
-            Console.WriteLine("Introduce en número de unidades");
-            UnidadesMax = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduce en número de unidades");
-            UnidadesDisponibles = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca el precio de unidad");
-            PrecioUnidad = double.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca una descripción sobre el producto");
-            Descripcion = Console.ReadLine();
-        }
+        // Método que solicita los detalles del producto
+        public virtual void SolicitarDetalles() {
+            bool ejecucionCompletada = true;
 
+            do {
+                try {
+                    Console.WriteLine("Introduce el nombre");
+                    Nombre = Console.ReadLine();
+
+                    Console.WriteLine("Introduce un número de unidades máximo");
+                    UnidadesMax = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Introduce un número de unidades");
+                    UnidadesDisponibles = int.Parse(Console.ReadLine());
+
+
+                    Console.WriteLine("Por favor, introduzca un número entero de unidades");
+
+                    Console.WriteLine("Introduzca el precio de unidad");
+                    PrecioUnidad = double.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Introduzca una descripción sobre el producto");
+                    Descripcion = Console.ReadLine();
+                }
+                catch (FormatException) {
+                    ejecucionCompletada = false;
+                    Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
+                }
+
+            } while (!ejecucionCompletada);
+
+        }
         public abstract string SaveInfo();
     }
 }
