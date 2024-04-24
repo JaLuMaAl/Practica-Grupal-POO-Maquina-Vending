@@ -6,11 +6,16 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 namespace MaquinaVending {
-    internal class MaterialPrecioso : Producto {
+    internal class MaterialPrecioso : Producto 
+    {
+        // Propiedades exclusivas de productos de tipo material precioso
         public string TipoMaterial { get; set; }
         public double PesoGramos { get; set; }
 
+        // Constructor vacío
         public MaterialPrecioso() { }
+
+        // Constructor parametrizado
         public MaterialPrecioso(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, string material, double pesoGramos)
             : base(id, nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
         {
@@ -18,8 +23,10 @@ namespace MaquinaVending {
             TipoMaterial = material;
             PesoGramos = pesoGramos;
         }
+
         public MaterialPrecioso(int id) : base(id) { }
 
+        // // Método para mostrar información de productos de tipo material precioso
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}\n" +
@@ -27,6 +34,7 @@ namespace MaquinaVending {
                 $"Peso (gramos): {PesoGramos}\n";
         }
 
+        // Método para solicitar detalles de productos tipo material precioso
         public override void SolicitarDetalles() {
             base.SolicitarDetalles();
             Console.WriteLine("Introduzca el tipo de material: ");
@@ -34,6 +42,8 @@ namespace MaquinaVending {
             Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
             PesoGramos= int.Parse(Console.ReadLine());
         }
+
+        // Método que devuelve información sobre productos de tipo material precioso para guardar en un archivo csv
         public override string SaveInfo()
         {
             return $"1;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";

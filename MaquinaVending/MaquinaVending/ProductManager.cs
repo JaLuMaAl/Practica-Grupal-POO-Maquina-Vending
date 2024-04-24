@@ -42,15 +42,20 @@ namespace MaquinaVending
                 {
                     pTemp = p;
                 }
+                else
+                {
+                    Console.WriteLine("No se ha encontrado un producto con el ID introducido.");
+                }
             }
 
             // Devuelvo el producto almacenado en pTemp, si no ha encontrado el producto devolverá null
             return pTemp;
         }
 
+        // Método para pagar con tarjeta
         public void PagoTarjeta(double precio)
         {
-            Console.WriteLine("Introduce los sisguientes datos para completar la compra:");
+            Console.WriteLine("Introduce los siguientes datos para completar la compra:");
             Console.Write("Número de tarjeta: ");
             int nTarjeta = int.Parse(Console.ReadLine());
 
@@ -63,11 +68,13 @@ namespace MaquinaVending
             Console.WriteLine($"Compra realizada con éxito por un importe de {precio}€");
         }
 
+        // Método para pagar con efectivo
         public void PagoEfectivo(double precio)
         {
 
         }
 
+        // Método para añadir producto nuevo dentro del método CargaIndividual()
         public void AddNewProduct()
         {
             Console.WriteLine("Qué tipo de producto desea añadir?");
@@ -105,7 +112,6 @@ namespace MaquinaVending
                     break;  
             }
         }
-
 
         // Método que recibe un producto y establece sus unidades disponibles a sus unidades máximas
         public void ReponerProducto(Producto producto)
