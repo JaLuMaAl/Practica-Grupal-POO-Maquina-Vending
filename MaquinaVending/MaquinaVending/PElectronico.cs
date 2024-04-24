@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class PElectronico : Producto {
+    internal class PElectronico : Producto 
+    {
+        // Propiedades exclusivas de productos electrónicos
         public string Materiales { get; set; }
         public bool IncluyePilas { get; set; }
         public bool Precargado { get; set; }
 
+        // Constructor vacío
         public PElectronico() { }
+
+        // Constructor parametrizado
         public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,string materiales, bool incluyePilas, bool precargado)
             :base(id,nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
         {
@@ -24,6 +29,7 @@ namespace MaquinaVending
 
         public PElectronico(int id):base(id) { }
 
+        // Método para mostrar información de productos electrónicos
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}\n" +
@@ -32,10 +38,12 @@ namespace MaquinaVending
                    $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
 
-        public override bool SolicitarDetalles() {
-            base.SolicitarDetalles(); // Solicitar detalles generales del producto
+        // Método para solicitar detalles de productos electrónicos
+        public override void SolicitarDetalles() 
+        {
+            base.SolicitarDetalles();
 
-            Console.WriteLine("Introduzca los materiales utilizados en la fabricación del producto:");
+            Console.Write("Introduzca los materiales utilizados en la fabricación del producto: ");
             Materiales = Console.ReadLine();
 
             bool opcionValida = false;
@@ -83,6 +91,7 @@ namespace MaquinaVending
             } while (!opcionValida);
         }
 
+        // Método que devuelve información sobre productos electrónicos para guardar en un archivo csv
         public override string SaveInfo()
         {
             return $"3;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";

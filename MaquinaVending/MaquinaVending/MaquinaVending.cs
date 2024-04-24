@@ -32,6 +32,7 @@ namespace MaquinaVending
             List<Producto> carrito = new List<Producto>();
 
             int opcion = 0;
+            // Variable que almacena la suma de los precios de los productos comprados y se pasa por parametro a métodos de pago
             double precioTotal = 0;
 
             // Comprobamos si la máquina expendedora contiene productos
@@ -46,98 +47,118 @@ namespace MaquinaVending
 
                 foreach (Producto p in listaProductos)
                 {
+                    // Muestra la información parcial de cada producto disponible al usuario para que este elija
                     Console.WriteLine(p.MostrarInfoParcial());
                 }
 
+                // Bucle do-while por si el usuario desea comprar mas de un producto; se repite el proceso
                 do
                 {
+                    // Creamos un objeto de tipo Producto y le asignamos el valor del producto elegido por el usuario
                     Producto productoElegido = productManager.ElegirProducto();
 
+                    // Se comprueba si el producto elegido existe
                     if (productoElegido != null)
                     {
+                        // Si hay unidades disponibles del producto elegido
                         if (productoElegido.UnidadesDisponibles > 0)
                         {
+                            // Se añade el producto elegido a la lista de tipo Producto 'carrito'
                             carrito.Add(productoElegido);
-                            precioTotal = +productoElegido.PrecioUnidad;
+
+                            // Añadimos el precio unitario del producto al precio total a pagar y se resta una unidad disponible al producto elegido
+                            precioTotal += productoElegido.PrecioUnidad;
                             productoElegido.UnidadesDisponibles--;
                             Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
 
+                            // Preguntamos al usuario si desea continuar con su compra o comprar otro producto
                             Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
                             opcion = int.Parse(Console.ReadLine());
                         }
                         else
                         {
+                            // Si no hay unidades disponibles del producto elegido
                             Console.WriteLine("No hay unidades disponibles de este producto.");
                         }
                     }
+                    // Si el producto elegido no existe
                     else
                     {
                         Console.WriteLine("El producto con el ID introducido no esta disponible.");
                     }
                 } while (opcion == 1);
 
+                // Si la lista de productos del usuario para comprar no esta vacia
                 if (carrito.Count > 0)
                 {
                     Console.WriteLine("Tu carrito incluye:");
 
+                    // Se muestra por pantalla los productos en el carrito de compra del usuario
                     foreach (Producto p in carrito)
                     {
                         Console.WriteLine($"{p.Nombre}");
                     }
 
+                    // Se muestra por pantalla el precio a pagar y se pasa este valor por parametro al método Pagar
                     Console.WriteLine($"El precio total a pagar es de {precioTotal}€.");
                     Pagar(precioTotal);
                 }
             }
         }
 
-        // Método para pagar el carrito
+        // Método para finalizar compra de productos mediante pago efectivo o por tarjeta
         private void Pagar(double precio)
         {
             Console.WriteLine("Métodos de pago disponible");
-            Console.Write("\t1. Tarjeta\n\t2. Efectivo");
-            Console.WriteLine("Cancelar operación");
+            Console.WriteLine("\t1. Tarjeta\n\t2. Efectivo\n\t3. Cancelar operación");
 
             int opcion = 0;
 
-            Console.Write("Opción: ");
-            opcion = int.Parse(Console.ReadLine());
-
-            switch(opcion)
+            do
             {
-                case 1:
-                    productManager.PagoTarjeta(precio);
-                    break;
-                case 2:
-                    productManager.PagoEfectivo(precio);
-                    break;
-                case 3:
-                    SalirGuardar(); // comprobar
-                    break;
-                default:
-                    Console.WriteLine("Opción no válida."); //Dar opción de salir o introducir opcion de nuevo
-                    break;
-            }
+                Console.Write("Opción: ");
+                opcion = int.Parse(Console.ReadLine());
+
+                switch (opcion)
+                {
+                    case 1:
+                        productManager.PagoTarjeta(precio);
+                        break;
+                    case 2:
+                        productManager.PagoEfectivo(precio);
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Vuelve a introducir la opción.");
+                        break;
+                }
+                // Si la opción introducida por el usuario no es válida, se pregunta por una opción por pantalla otra vez
+            } while (opcion < 1 || opcion > 3);
         }
 
-        // Método que muestra la información completa de los productos
+        // Método que muestra la información de los productos
         public void MostrarInfoProductos()
         {
             foreach(Producto producto in listaProductos)
             {
+                // El método MostrarInfoParcial excluye la descripción de cada producto como se pide en el enunciado
                 Console.WriteLine(producto.MostrarInfoParcial());
             }
 
+            // Creamos un objeto de tipo producto 'p' y le asignamos el producto elegido por el usuario. Despues se muestra la información completa de este producto por pantalla.
             Producto p = productManager.ElegirProducto();
-            p.MostrarInfoParcial();
+            p.MostrarInfoTotal();
         }
 
-        // Método que permite al Admin reponer productos existentes o añadir nuevos
+        // Método que permite al admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
             int numeroSlots = 12;
+            // Antes de ejecutar el método, se comprueba que el usuario es admin mediante el método CheckAdmin()
             bool accesoAdmin = CheckAdmin();
 
+            // Si CheckAdmin devuelve 'true'; si el usuario es admin
             if (accesoAdmin)
             {
                 Console.WriteLine("Desea reponer o añadir productos?");
@@ -147,36 +168,41 @@ namespace MaquinaVending
                 switch(opcion)
                 {
                     case 1:
+                        // Creamos un objeto de tipo Producto y le asignamos el producto elegido por el admin para reponer
                         Producto pReponer = productManager.ElegirProducto();
+
+                        // Si el producto elegido existe se pasa el producto por parametro y se repone 
                         if (pReponer != null)
                         {
                             productManager.ReponerProducto(pReponer);
                         }
+                        // Si el producto elegido no existe
                         else
                         {
                             Console.WriteLine("ID de producto no encontrado");
                         }
                         break;
-
                     case 2:
+                        // Se comprueba que la cantidad de productos es menor que el número de slots
                         if (listaProductos.Count < numeroSlots)
                         {
                             productManager.AddNewProduct();
                         }
+                        // Si no hay espacio disponible en la máquina vending, no se pueden añadir productos
                         else
                         {
                             Console.WriteLine("La capacidad de la máquina esta llena. No se pueden añadir productos.");
                         }
                         break;
-
                     default:
                         Console.WriteLine("Opción no válida.");
                         break;
                 }
             }
+            // Si el metodo CheckAdmin devuelve 'false'; si el usuario no es admin
             else
             {
-                Console.WriteLine("Acceso denegado, clave incorrecta");
+                Console.WriteLine("Acceso denegado. Clave incorrecta.");
             }
         }
 
@@ -191,16 +217,16 @@ namespace MaquinaVending
             }
         }
 
-        // Método que compureba si clave secreta introducida por el usuario es correcta, para permitir el acceso a las funciones de administrador
+        // Método booleano que compureba si clave secreta introducida por el usuario es correcta para permitir el acceso a las funciones de admin
         private bool CheckAdmin()
         {
             bool check = false;
 
-            // Solicito la clave secreta al usuario
+            // Solicito la clave secreta al usuario por pantalla
             Console.WriteLine("Introduce clave secreta: ");
             int clave = int.Parse(Console.ReadLine());
 
-            // Comparo la clave del usuario con la clave secreta establecida
+            // Comparo la clave del usuario con la clave secreta establecida en el constructor
             if (clave == ClaveSecreta)
             {
                 Console.WriteLine("Clave secreta correcta. Bienvenido Admin.");

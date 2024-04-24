@@ -9,11 +9,14 @@ namespace MaquinaVending {
     internal abstract class Producto {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public int UnidadesMax { get; set; }
         public int UnidadesDisponibles { get; set; }
         public double PrecioUnidad { get; set; }
         public string Descripcion { get; set; }
 
+        // Esta propiedad se ha creado para que el admin sea capaz de introducir un valor máximo de unidades (capacidad) en la máquina vending
+        public int UnidadesMax { get; set; }
+
+        // Constructor vacío
         public Producto() { }
         public Producto(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion) {
             Id = id;

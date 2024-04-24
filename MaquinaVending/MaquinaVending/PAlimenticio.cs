@@ -9,12 +9,15 @@ namespace MaquinaVending
 {
     internal class PAlimenticio : Producto
     {
-        // Información nutricional
+        // Propiedades exclusivas de productos alimenticios
         public int Calorias { get; set; }
         public int Grasa { get; set; }
         public int Azucar {  get; set; }
 
+        // Constructor vacío
         public PAlimenticio() { } 
+
+        // Constructor parametrizado
         public PAlimenticio(int id,string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
             :base(id,nombre, unidadesMax,unidadesDisponibles, precioUnidad, descripcion)
         {
@@ -26,6 +29,7 @@ namespace MaquinaVending
 
         public PAlimenticio(int id) : base(id) { }
 
+        // Método para mostrar información de productos alimenticios
         public override string MostrarInfoTotal()
         {
             return $"{base.MostrarInfoTotal()}\n" +
@@ -34,24 +38,20 @@ namespace MaquinaVending
                 $"Azucar: {Azucar}g\n";
         }
 
-        public override bool SolicitarDetalles() {
-            do {
-                try {
-                    base.SolicitarDetalles();
-                    Console.WriteLine("Introduzca la cantidad de calorías que contiene el producto");
-                    Calorias = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Introduzca la cantidad de grasa en gramos");
-                    Grasa = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Introduzca la cantidad de azúcar en gramos");
-                    Azucar = int.Parse(Console.ReadLine());
-                }
-                catch (FormatException) {
-                    ejecucionCompletada = false;
-                    Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
-                }
-            } while (!ejecucionCompletada);
+        // Método para solicitar detalles de productos alimenticios
+        public override void SolicitarDetalles() 
+        { 
+            base.SolicitarDetalles();
+
+            Console.Write("Introduzca la cantidad de calorías que contiene el producto: ");
+            Calorias = int.Parse(Console.ReadLine());
+            Console.Write("Introduzca la cantidad de grasa en gramos: ");
+            Grasa = int.Parse(Console.ReadLine());
+            Console.Write("Introduzca la cantidad de azúcar en gramos: ");
+            Azucar = int.Parse(Console.ReadLine());
         }
 
+        // Método que devuelve información sobre productos alimenticios para guardar en un archivo csv
         public override string SaveInfo()
         {
             return $"2;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
