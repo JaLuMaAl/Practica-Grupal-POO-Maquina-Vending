@@ -11,7 +11,7 @@ namespace MaquinaVending {
         public double PesoGramos { get; set; }
 
         public MaterialPrecioso() { }
-        public MaterialPrecioso(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, TipoMaterialPrecioso tipo, double pesoGramos)
+        public MaterialPrecioso(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, string tipo, double pesoGramos)
             : base(id, nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
         {
             Id = id;
@@ -34,7 +34,7 @@ namespace MaquinaVending {
             Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
             PesoGramos= int.Parse(Console.ReadLine());
         }
-        public override string ToFile()
+        public override string SaveInfo()
         {
             return $"1;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Tipo};{PesoGramos};;;;;";
         }

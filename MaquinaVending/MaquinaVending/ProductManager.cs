@@ -154,7 +154,7 @@ namespace MaquinaVending
 
                     while ((line = sr.ReadLine()) != null)
                     {
-                        string[] datos = line.Split(";");
+                        string[] datos = line.Split(';');
                     }
                 }
             }
