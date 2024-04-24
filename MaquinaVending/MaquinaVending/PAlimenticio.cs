@@ -34,14 +34,22 @@ namespace MaquinaVending
                 $"Azucar: {Azucar}g\n";
         }
 
-        public override void SolicitarDetalles() { 
-            base.SolicitarDetalles();
-            Console.WriteLine("Introduzca la cantidad de calorías que contiene el producto");
-            Calorias = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca la cantidad de grasa en gramos");
-            Grasa = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca la cantidad de azúcar en gramos");
-            Azucar = int.Parse(Console.ReadLine());
+        public override bool SolicitarDetalles() {
+            do {
+                try {
+                    base.SolicitarDetalles();
+                    Console.WriteLine("Introduzca la cantidad de calorías que contiene el producto");
+                    Calorias = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Introduzca la cantidad de grasa en gramos");
+                    Grasa = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Introduzca la cantidad de azúcar en gramos");
+                    Azucar = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException) {
+                    ejecucionCompletada = false;
+                    Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
+                }
+            } while (!ejecucionCompletada);
         }
 
         public override string SaveInfo()

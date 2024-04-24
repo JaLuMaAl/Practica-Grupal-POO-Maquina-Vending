@@ -32,7 +32,7 @@ namespace MaquinaVending
                    $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
         }
 
-        public override void SolicitarDetalles() {
+        public override bool SolicitarDetalles() {
             base.SolicitarDetalles(); // Solicitar detalles generales del producto
 
             Console.WriteLine("Introduzca los materiales utilizados en la fabricación del producto:");
