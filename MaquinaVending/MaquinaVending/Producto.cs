@@ -52,15 +52,15 @@ namespace MaquinaVending
 
         public virtual void SolicitarDetalles()
         {
-            Console.WriteLine("Introduce el nombre");
+            Console.Write("Introduce el nombre del nuevo producto: ");
             Nombre = Console.ReadLine();
-            Console.WriteLine("Introduce en número de unidades");
+            Console.Write("Introduce el número de unidades disponibles: ");
             UnidadesMax = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduce en número de unidades");
+            Console.Write("Introduce la capacidad máxima de unidades: ");
             UnidadesDisponibles = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca el precio de unidad");
+            Console.Write("Introduzca el precio de una unidad del producto (en euros): ");
             PrecioUnidad = double.Parse(Console.ReadLine());
-            Console.WriteLine("Introduzca una descripción sobre el producto");
+            Console.WriteLine("Introduzca una descripción sobre el producto: ");
             Descripcion = Console.ReadLine();
         }
 
