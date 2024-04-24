@@ -29,9 +29,9 @@ namespace MaquinaVending {
 
         public override void SolicitarDetalles() {
             base.SolicitarDetalles();
-            Console.WriteLine("Introduzca el tipo de material");
+            Console.WriteLine("Introduzca el tipo de material: ");
             Tipo = Console.ReadLine();
-            Console.WriteLine("Introduzca cuanto pesa el producto en gramos");
+            Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
             PesoGramos= int.Parse(Console.ReadLine());
         }
         public override string SaveInfo()
