@@ -45,6 +45,7 @@ namespace MaquinaVending
                 else
                 {
                     Console.WriteLine("No se ha encontrado un producto con el ID introducido.");
+                    Console.ReadKey();
                 }
             }
 

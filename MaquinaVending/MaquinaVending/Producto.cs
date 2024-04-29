@@ -33,17 +33,17 @@ namespace MaquinaVending {
         public string MostrarInfoParcial() 
         {
             return $"({Id}) {Nombre}\n" +
-                $"{Unidades} unidades disponibles\n" +
-                $"{PrecioUnidad}€/unidad";
+                $"Unidades disponibles: {Unidades} \n" +
+                $"Precio: {PrecioUnidad} euros / unidad";
         }
 
         // Método que devuelve un string con la información del producto
         public virtual string MostrarInfoTotal()
         {
             return $"({Id}) {Nombre}\n" +
-                $"{Unidades} unidades disponibles\n" +
-                $"{PrecioUnidad}€/unidad\n" +
-                $"{Descripcion}\n";
+                $"Unidades disponibles: {Unidades} \n" +
+                $"Precio: {PrecioUnidad} euros / unidad\n" +
+                $"{Descripcion}";
         }
 
         // Método que solicita los detalles del producto y modifica las propiedades del mismo
@@ -54,16 +54,16 @@ namespace MaquinaVending {
 
             try 
             {
-                Console.WriteLine("Introduce el nombre");
+                Console.Write("Introduzca el nombre del producto: ");
                 Nombre = Console.ReadLine();
 
-                Console.WriteLine("Introduce un número de unidades");
+                Console.Write("Introduzca las unidades: ");
                 Unidades = int.Parse(Console.ReadLine());
 
-                Console.WriteLine("Introduzca el precio de unidad");
+                Console.Write("Introduzca el precio por unidad: ");
                 PrecioUnidad = double.Parse(Console.ReadLine());
 
-                Console.WriteLine("Introduzca una descripción sobre el producto");
+                Console.Write("Introduzca una descripción sobre el producto: ");
                 Descripcion = Console.ReadLine();
                 ejecucionCompletada = true;
                

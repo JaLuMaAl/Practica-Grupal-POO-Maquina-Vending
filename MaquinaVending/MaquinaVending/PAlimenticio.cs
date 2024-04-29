@@ -32,7 +32,7 @@ namespace MaquinaVending
         // Método para mostrar información de productos alimenticios
         public override string MostrarInfoTotal()
         {
-            return $"{base.MostrarInfoTotal()}\n" +
+            return $"{base.MostrarInfoTotal()}" +
                 $"\nCalorías: {Calorias} kcal\n" +
                 $"Grasa: {Grasa}g\n" +
                 $"Azucar: {Azucar}g\n";

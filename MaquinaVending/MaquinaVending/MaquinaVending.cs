@@ -144,15 +144,29 @@ namespace MaquinaVending
         // Método que muestra la información de los productos
         public void MostrarInfoProductos()
         {
-            foreach(Producto producto in listaProductos)
+            // Compruebo que la máquina contiene productos, y no está vacía
+            if (listaProductos.Count > 0)
             {
-                // El método MostrarInfoParcial excluye la descripción de cada producto como se pide en el enunciado
-                Console.WriteLine(producto.MostrarInfoParcial());
-            }
+                foreach (Producto producto in listaProductos)
+                {
+                    // El método MostrarInfoParcial excluye información específica de cada producto
+                    Console.WriteLine(producto.MostrarInfoParcial());
+                }
 
-            // Creamos un objeto de tipo producto 'p' y le asignamos el producto elegido por el usuario. Despues se muestra la información completa de este producto por pantalla.
-            Producto p = productManager.ElegirProducto();
-            p.MostrarInfoTotal();
+                // Creamos un objeto de tipo producto 'p' y le asignamos el producto elegido por el usuario. Despues se muestra la información completa de este producto por pantalla.
+                Producto p = productManager.ElegirProducto();
+
+                if (p != null)
+                {
+                    Console.WriteLine(p.MostrarInfoTotal());
+                }
+            }
+            else
+            {
+                Console.WriteLine("La máquina no contiene productos");
+            }
+                
+            
         }
 
         // Método que permite al admin reponer productos existentes o añadir nuevos
