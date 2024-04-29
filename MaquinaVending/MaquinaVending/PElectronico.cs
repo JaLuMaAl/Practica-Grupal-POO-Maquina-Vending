@@ -50,56 +50,55 @@ namespace MaquinaVending
                     Console.Write("Introduzca los materiales utilizados en la fabricación del producto: ");
                     Materiales = Console.ReadLine();
 
-                    bool opcionValida = false;
+                    // Solicitar la inclusión de pilas del producto
+                    int pilas = 0;
+                    do
+                    {
+                        Console.Write("Introduzca (1) si el producto incluye pilas y (0) si el producto no incluye pilas: ");
+                        pilas = int.Parse(Console.ReadLine());
 
-                    // Solicitar información sobre si el producto incluye pilas
+                        if (pilas == 1)
+                        {
+                            IncluyePilas = true;
+                        }
+                        else if (pilas == 0)
+                        {
+                            IncluyePilas = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opción no válida.");
+                        }
+                    }
+                    while (pilas < 0 || pilas > 1);
+
+
+                    // Solicitar si el producto viene precargado
+                    int precargado = 0;
                     do 
                     {
-                        Console.WriteLine("Introduzca (1) si el producto incluye pilas y (0) si el producto no incluye pilas:");
-                        string input = Console.ReadLine();
+                        Console.Write("Introduzca (1) si el producto está precargado y (0) si el producto no está precargado: ");
+                        precargado = int.Parse(Console.ReadLine());
 
-                        switch (input) {
-                            case "0":
-                                IncluyePilas = false;
-                                opcionValida = true;
-                                break;
-                            case "1":
-                                IncluyePilas = true;
-                                opcionValida = true;
-                                break;
-                            default:
-                                Console.WriteLine("Opción no válida. Introduzca 1 o 0.");
-                                break;
+                        if (precargado == 1)
+                        {
+                            Precargado = true;
                         }
-                    } while (!opcionValida);
-
-                    opcionValida = false; // Restablecer la variable para el siguiente uso
-
-                    // Solicitar información sobre si el producto está precargado
-                    do 
-                    {
-                        Console.WriteLine("Introduzca (1) si el producto está precargado y (0) si el producto no está precargado:");
-                        string input = Console.ReadLine();
-
-                        switch (input) {
-                            case "0":
-                                Precargado = false;
-                                opcionValida = true;
-                                break;
-                            case "1":
-                                Precargado = true;
-                                opcionValida = true;
-                                break;
-                            default:
-                                Console.WriteLine("Opción no válida. Introduzca 1 o 0.");
-                                break;
+                        else if (precargado == 0)
+                        {
+                            Precargado = false;
                         }
-                    } while (!opcionValida);
+                        else
+                        {
+                            Console.WriteLine("Opción no válida.");
+                        }
+                    } while (precargado < 0 || precargado > 1);
                 }
                 catch (FormatException) 
                 {
-                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de productos alimenticios.");
-                    ejecucionCompletada = false; // Marcar ejecución como no completada en caso de error
+                    Console.WriteLine("Se ha producido un error al introducir los valores específicos del producto electrónico. Pruebe a añadir de nuevo el producto");
+                    // En caso de un error en la ejecución, declaro la variable ejecucíonCompletada a False, señalando que la ejecución no se ha dado como debería
+                    ejecucionCompletada = false; 
                 }
             }
 

@@ -34,16 +34,17 @@ namespace MaquinaVending {
                 $"Peso (gramos): {PesoGramos}\n";
         }
 
-        // Método para solicitar detalles de productos tipo material precioso
+        // Método para solicitar detalles del producto del tipo material precioso
         public override bool SolicitarDetalles() 
         {
-            bool ejecucionCompletada = base.SolicitarDetalles(); // Solicitar detalles comunes
-
+            // Solicitar detalles comunes
+            bool ejecucionCompletada = base.SolicitarDetalles(); 
+            
+            // Si se ha realizado con éxito la primera parte de la ejecución, solicito los detalles específicos
             if (ejecucionCompletada) 
             {
                 try 
                 {
-                    base.SolicitarDetalles();
                     Console.WriteLine("Introduzca el tipo de material: ");
                     TipoMaterial = Console.ReadLine();
                     Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
@@ -51,11 +52,13 @@ namespace MaquinaVending {
                 }
                 catch (FormatException) 
                 {
-                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de productos alimenticios.");
-                    ejecucionCompletada = false; // Marcar ejecución como no completada en caso de error
+                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de material precioso. Pruebe a añadir de nuevo el producto");
+                    // En caso de un error en la ejecución, declaro la variable ejecucíonCompletada a False, señalando que la ejecución no se ha dado como debería
+                    ejecucionCompletada = false; 
                 }
             }
 
+            // Devuelvo el estado final de la variable que almacena si se ha completado la ejecución del código
             return ejecucionCompletada;
         }
 

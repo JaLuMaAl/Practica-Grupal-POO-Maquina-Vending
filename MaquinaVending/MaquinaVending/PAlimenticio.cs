@@ -41,25 +41,29 @@ namespace MaquinaVending
         // Método para solicitar detalles de productos alimenticios
         public override bool SolicitarDetalles() 
         {
-            bool ejecucionCompletada = base.SolicitarDetalles(); // Solicitar detalles comunes
+            // Solicito los detalles comunes y almacena el booleano de regreso en una variable.
+            bool ejecucionCompletada = base.SolicitarDetalles();
 
+            // Si se ha realizado sin fallos la ejecución del método base, solicito los detalles específicos del producto alimenticio
             if (ejecucionCompletada) 
             {
                 try 
                 {
-                    Console.WriteLine("Introduce las calorías");
+                    Console.Write("Introduce las calorías: ");
                     Calorias = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Introduce la cantidad de grasa (en gramos)");
+                    Console.Write("Introduce la cantidad de grasa (en gramos): ");
                     Grasa = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Introduce la cantidad de azúcar (en gramos)");
+                    Console.Write("Introduce la cantidad de azúcar (en gramos): ");
                     Azucar = int.Parse(Console.ReadLine());
                 }
                 catch (FormatException) 
                 {
-                    Console.WriteLine("Se ha producido un error al introducir los valores específicos de productos alimenticios.");
-                    ejecucionCompletada = false; // Marcar ejecución como no completada en caso de error
+                    Console.WriteLine("Se ha producido un error al introducir los valores específicos del producto alimenticio. Pruebe a añadir de nuevo el producto");
+
+                    // En caso de un error en la ejecución, declaro la variable ejecucíonCompletada a False, señalando que la ejecución no se ha dado como debería
+                    ejecucionCompletada = false; 
                 }
             }
 

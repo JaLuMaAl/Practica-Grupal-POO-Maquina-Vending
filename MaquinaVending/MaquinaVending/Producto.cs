@@ -46,9 +46,10 @@ namespace MaquinaVending {
                 $"{Descripcion}\n";
         }
 
-        // Método que solicita los detalles del producto
+        // Método que solicita los detalles del producto y modifica las propiedades del mismo
         public virtual bool SolicitarDetalles() 
         {
+            // Variable que almacena si la ejecución del programa se ha completado. True si se ha realizado con éxito, False si ha habido algún error
             bool ejecucionCompletada = false;
 
             try 
