@@ -16,10 +16,9 @@ namespace MaquinaVending {
         public MaterialPrecioso() { }
 
         // Constructor parametrizado
-        public MaterialPrecioso(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion, string material, double pesoGramos)
-            : base(id, nombre, unidadesDisponibles, precioUnidad, descripcion)
+        public MaterialPrecioso(int id, string nombre, int unidades, double precioUnidad, string descripcion, string material, double pesoGramos)
+            : base(id, nombre, unidades, precioUnidad, descripcion)
         {
-            Id = id;
             TipoMaterial = material;
             PesoGramos = pesoGramos;
         }
@@ -45,9 +44,9 @@ namespace MaquinaVending {
             {
                 try 
                 {
-                    Console.WriteLine("Introduzca el tipo de material: ");
+                    Console.WriteLine("Introduzca el tipo de material del que está compuesto el producto: ");
                     TipoMaterial = Console.ReadLine();
-                    Console.WriteLine("Introduzca cuanto pesa el producto (en gramos): ");
+                    Console.WriteLine("Introduzca el peso del producto (gramos) con decimales: ");
                     PesoGramos = int.Parse(Console.ReadLine());
                 }
                 catch (FormatException) 
@@ -65,7 +64,7 @@ namespace MaquinaVending {
         // Método que devuelve información sobre productos de tipo material precioso para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"1;{Nombre};{UnidadesMax};{Unidades};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";
+            return $"1;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";
         }
 
     }

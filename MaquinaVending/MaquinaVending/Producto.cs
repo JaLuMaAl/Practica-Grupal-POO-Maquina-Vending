@@ -15,11 +15,11 @@ namespace MaquinaVending {
 
         // Constructor vacío
         public Producto() { }
-        public Producto(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion) 
+        public Producto(int id, string nombre, int unidades, double precioUnidad, string descripcion) 
         {
             Id = id;
             Nombre = nombre;
-            Unidades = unidadesDisponibles;
+            Unidades = unidades;
             PrecioUnidad = precioUnidad;
             Descripcion = descripcion;
         }

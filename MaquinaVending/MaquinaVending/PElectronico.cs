@@ -108,7 +108,7 @@ namespace MaquinaVending
         // Método que devuelve información sobre productos electrónicos para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"3;{Nombre};{UnidadesMax};{Unidades};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
+            return $"3;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
         }
 
     }

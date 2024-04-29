@@ -21,8 +21,12 @@ namespace MaquinaVending
         {
             listaProductos = new List<Producto>();
             productManager = new ProductManager(listaProductos);
+
             // Establecemos la clave secreta del admin internamente en el programa, se supone que como es el admin debe conocerla
             ClaveSecreta = 247209;
+
+            // Cargar los productos del archivo "productos.csv"
+            productManager.CargaProductosArchivo();
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -254,7 +258,8 @@ namespace MaquinaVending
         // Método que guarda los datos y cierra el programa
         public void SalirGuardar()
         {
-
+            productManager.GuardarProductosArchivo();
+            Console.WriteLine("Datos guardados");
         }
     }
 }

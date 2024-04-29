@@ -18,8 +18,8 @@ namespace MaquinaVending
         public PAlimenticio() { } 
 
         // Constructor parametrizado
-        public PAlimenticio(int id,string nombre, int unidadesDisponibles, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
-            :base(id,nombre,unidadesDisponibles, precioUnidad, descripcion)
+        public PAlimenticio(int id,string nombre, int unidades, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
+            :base(id, nombre, unidades, precioUnidad, descripcion)
         {
             Id = id;
             Calorias = kcal;
@@ -74,7 +74,7 @@ namespace MaquinaVending
         // Método que devuelve información sobre productos alimenticios para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"2;{Nombre};{UnidadesMax};{Unidades};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
+            return $"2;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
         }
     }
 }

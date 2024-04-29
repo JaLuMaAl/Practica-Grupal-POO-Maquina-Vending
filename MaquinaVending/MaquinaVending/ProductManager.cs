@@ -143,13 +143,20 @@ namespace MaquinaVending
             }
         }
 
+
+        // Método que guarda la información de los productos de la máquina en el archivo productos.csv
         public void GuardarProductosArchivo()
         {
+            // Compruebo la existencia del archivo productos.csv
             if (File.Exists(path))
             {
-                // Abro el archivo productos.csv en modo escritura sobreescribiendo su contenido
-                using (StreamWriter sw = new StreamWriter("productos.csv", false))
+                // Si el archivo existe, lo abro en modo escritura, sobreescribiendo su contenido
+                using (StreamWriter sw = new StreamWriter(path, false))
                 {
+                    // Header
+                    sw.WriteLine("tipo_producto;id_producto;nombre_producto;unidades_producto;precio_unidad_producto;descripcion_producto;materiales;peso;calorias;grasa;azucar;tiene_bateria;precargado");
+
+                    // Escribo en el archivo la información de los productos
                     foreach (Producto p in listaProductos)
                     {
                         sw.WriteLine(p.SaveInfo());
@@ -158,24 +165,66 @@ namespace MaquinaVending
             }
             else
             {
+                // Si el archivo no existe, lo creo
                 File.Create(path).Close();
             }
         }
 
+        // Método empleado para cargar la información de los productos de la máquina, leo el archivo "productos.csv" y creo los productos añadiendolos a la lista de productos
         public void CargaProductosArchivo()
         {
+            // Compruebo la existencia del archivo
             if (File.Exists(path))
             {
                 string line = "";
+                
+                // Se abre el archivo en modo lectura
                 using (StreamReader sr = new StreamReader(path))
                 {
                     string header = sr.ReadLine();
 
                     while ((line = sr.ReadLine()) != null)
                     {
+                        // Se divide la linea leida mediante el delimitador ; separando así las propiedades de los productos
                         string[] datos = line.Split(';');
+
+                        // Paso los campos del array obtenido como argumentos para los contructores de los productos
+
+                        string tipoProducto = datos[0];
+                        int id = int.Parse(datos[1]);
+                        string nombre = datos[2];
+                        int unidades = int.Parse(datos[3]);
+                        double precioUnidad = double.Parse(datos[4]);
+                        string descripcion = datos[5];
+
+                        // Diferencio que tipo de producto crear, usando el primer campo del array, que contiene un número del 1 al 2 que se corresponde con el tipo de producto
+                        switch (tipoProducto)
+                        {
+                            // Material Precioso
+                            case "1":
+                                MaterialPrecioso pMaterialPrecioso = new MaterialPrecioso(id, nombre, unidades, precioUnidad, descripcion, datos[6], double.Parse(datos[7]));
+                                listaProductos.Add(pMaterialPrecioso);
+                                break;
+
+                            // Producto Alimenticio
+                            case "2":
+                                PAlimenticio pAlimenticio = new PAlimenticio(id, nombre, unidades, precioUnidad, descripcion, int.Parse(datos[8]), int.Parse(datos[9]), int.Parse(datos[10]));
+                                listaProductos.Add(pAlimenticio);
+                                break;
+
+                            // Producto Electrónico
+                            case "3":
+                                PElectronico pElectronico = new PElectronico(id, nombre, unidades, precioUnidad, descripcion, datos[6], Convert.ToBoolean(datos[11]), Convert.ToBoolean(datos[12]));
+                                listaProductos.Add(pElectronico);
+                                break;
+                        }
                     }
                 }
+
+            }
+            else
+            {
+                File.Create(path).Close();
             }
             
         }
