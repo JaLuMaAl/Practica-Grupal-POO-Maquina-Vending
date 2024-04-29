@@ -61,14 +61,14 @@ namespace MaquinaVending
                     if (productoElegido != null)
                     {
                         // Si hay unidades disponibles del producto elegido
-                        if (productoElegido.UnidadesDisponibles > 0)
+                        if (productoElegido.Unidades > 0)
                         {
                             // Se añade el producto elegido a la lista de tipo Producto 'carrito'
                             carrito.Add(productoElegido);
 
                             // Añadimos el precio unitario del producto al precio total a pagar y se resta una unidad disponible al producto elegido
                             precioTotal += productoElegido.PrecioUnidad;
-                            productoElegido.UnidadesDisponibles--;
+                            productoElegido.Unidades--;
                             Console.WriteLine($"El producto {productoElegido.Nombre} ha sido añadido al carrito!");
 
                             // Preguntamos al usuario si desea continuar con su compra o comprar otro producto
@@ -154,11 +154,12 @@ namespace MaquinaVending
         // Método que permite al admin reponer productos existentes o añadir nuevos
         public void CargaIndividual()
         {
+            // La capacidad máxima de productos que soporta la máquina de vending son 12
             int numeroSlots = 12;
-            // Antes de ejecutar el método, se comprueba que el usuario es admin mediante el método CheckAdmin()
+            // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
             bool accesoAdmin = CheckAdmin();
 
-            // Si CheckAdmin devuelve 'true'; si el usuario es admin
+            // Si el usuario se ha autenticado, le aparecen las posibles acciones disponibles
             if (accesoAdmin)
             {
                 Console.WriteLine("Desea reponer o añadir productos?");
@@ -167,21 +168,24 @@ namespace MaquinaVending
 
                 switch(opcion)
                 {
+                    // Reponer producto
                     case 1:
-                        // Creamos un objeto de tipo Producto y le asignamos el producto elegido por el admin para reponer
+                        // Creamos un objeto de tipo Producto que recibe el producto elegido por el admin para reponer
                         Producto pReponer = productManager.ElegirProducto();
 
-                        // Si el producto elegido existe se pasa el producto por parametro y se repone 
+                        // Compruebo si el producto recibido existe
                         if (pReponer != null)
                         {
+                            // Si existe, lo repongo
                             productManager.ReponerProducto(pReponer);
                         }
-                        // Si el producto elegido no existe
                         else
                         {
                             Console.WriteLine("ID de producto no encontrado");
                         }
                         break;
+
+                    // Añadir nuevo producto
                     case 2:
                         // Se comprueba que la cantidad de productos es menor que el número de slots
                         if (listaProductos.Count < numeroSlots)
@@ -194,26 +198,34 @@ namespace MaquinaVending
                             Console.WriteLine("La capacidad de la máquina esta llena. No se pueden añadir productos.");
                         }
                         break;
+
                     default:
                         Console.WriteLine("Opción no válida.");
                         break;
                 }
             }
-            // Si el metodo CheckAdmin devuelve 'false'; si el usuario no es admin
-            else
-            {
-                Console.WriteLine("Acceso denegado. Clave incorrecta.");
-            }
+           
         }
 
-        // Método que permite al Admin reponer completamente las unidades de los productos existentes
+        // Método que permite al Admin reponer todos los productos a la vez, una cantidad determinada de unidades
         public void CargaCompleta()
         {
+            // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
             bool accesoAdmin = CheckAdmin();
 
+            // Si el usuario es el admin, permito realizar la acción
             if (accesoAdmin)
             {
                 // Reponer todos los productos
+                Console.Write($"Se van a reponer todos los productos simultáneamente, introduzca el número de unidades que se desean reponer: ");
+                int unidadesRepuestas = int.Parse(Console.ReadLine());
+
+                foreach (Producto p in listaProductos)
+                {
+                    p.Unidades += unidadesRepuestas;
+                }
+
+                Console.WriteLine("Las unidades de los productos se han repuesto con éxito");
             }
         }
 
@@ -229,12 +241,12 @@ namespace MaquinaVending
             // Comparo la clave del usuario con la clave secreta establecida en el constructor
             if (clave == ClaveSecreta)
             {
-                Console.WriteLine("Clave secreta correcta. Bienvenido Admin.");
+                Console.WriteLine("Clave secreta correcta. Bienvenido Administrador.");
                 check = true;
             }
             else if (clave != ClaveSecreta)
             {
-                Console.WriteLine("Clave secreta incorrecta.");
+                Console.WriteLine("Clave secreta incorrecta. Acceso denegado");
             }
             return check;
         }

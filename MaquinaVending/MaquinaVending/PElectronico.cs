@@ -18,8 +18,8 @@ namespace MaquinaVending
         public PElectronico() { }
 
         // Constructor parametrizado
-        public PElectronico(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion,string materiales, bool incluyePilas, bool precargado)
-            :base(id,nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
+        public PElectronico(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion,string materiales, bool incluyePilas, bool precargado)
+            :base(id,nombre, unidadesDisponibles, precioUnidad, descripcion)
         {
             Materiales = materiales;
             IncluyePilas = incluyePilas;
@@ -109,7 +109,7 @@ namespace MaquinaVending
         // Método que devuelve información sobre productos electrónicos para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"3;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
+            return $"3;{Nombre};{UnidadesMax};{Unidades};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
         }
 
     }

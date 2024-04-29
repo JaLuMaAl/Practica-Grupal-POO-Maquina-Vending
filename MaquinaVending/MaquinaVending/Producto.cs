@@ -9,21 +9,17 @@ namespace MaquinaVending {
     internal abstract class Producto {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public int UnidadesDisponibles { get; set; }
+        public int Unidades { get; set; }
         public double PrecioUnidad { get; set; }
         public string Descripcion { get; set; }
 
-        // Esta propiedad se ha creado para que el admin sea capaz de introducir un valor máximo de unidades (capacidad) en la máquina vending
-        public int UnidadesMax { get; set; }
-
         // Constructor vacío
         public Producto() { }
-        public Producto(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion) 
+        public Producto(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion) 
         {
             Id = id;
             Nombre = nombre;
-            UnidadesMax = unidadesMax;
-            UnidadesDisponibles = unidadesDisponibles;
+            Unidades = unidadesDisponibles;
             PrecioUnidad = precioUnidad;
             Descripcion = descripcion;
         }
@@ -37,7 +33,7 @@ namespace MaquinaVending {
         public string MostrarInfoParcial() 
         {
             return $"({Id}) {Nombre}\n" +
-                $"{UnidadesDisponibles} unidades disponibles\n" +
+                $"{Unidades} unidades disponibles\n" +
                 $"{PrecioUnidad}€/unidad";
         }
 
@@ -45,7 +41,7 @@ namespace MaquinaVending {
         public virtual string MostrarInfoTotal()
         {
             return $"({Id}) {Nombre}\n" +
-                $"{UnidadesDisponibles} unidades disponibles\n" +
+                $"{Unidades} unidades disponibles\n" +
                 $"{PrecioUnidad}€/unidad\n" +
                 $"{Descripcion}\n";
         }
@@ -60,11 +56,8 @@ namespace MaquinaVending {
                 Console.WriteLine("Introduce el nombre");
                 Nombre = Console.ReadLine();
 
-                Console.WriteLine("Introduce un número de unidades máximo");
-                UnidadesMax = int.Parse(Console.ReadLine());
-
                 Console.WriteLine("Introduce un número de unidades");
-                UnidadesDisponibles = int.Parse(Console.ReadLine());
+                Unidades = int.Parse(Console.ReadLine());
 
                 Console.WriteLine("Introduzca el precio de unidad");
                 PrecioUnidad = double.Parse(Console.ReadLine());
@@ -76,7 +69,7 @@ namespace MaquinaVending {
             }
             catch (FormatException) 
             {
-                Console.WriteLine("Se ha producido un error al introducir los valores, vuelva a añadir el producto con unos valores válidos");
+                Console.WriteLine("Se ha producido un error al introducir los valores, pruebe a vuelver a añadir el producto con unos valores válidos");
             }
 
             return ejecucionCompletada;

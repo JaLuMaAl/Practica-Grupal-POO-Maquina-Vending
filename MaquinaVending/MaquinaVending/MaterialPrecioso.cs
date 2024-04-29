@@ -16,8 +16,8 @@ namespace MaquinaVending {
         public MaterialPrecioso() { }
 
         // Constructor parametrizado
-        public MaterialPrecioso(int id, string nombre, int unidadesMax, int unidadesDisponibles, double precioUnidad, string descripcion, string material, double pesoGramos)
-            : base(id, nombre, unidadesMax, unidadesDisponibles, precioUnidad, descripcion)
+        public MaterialPrecioso(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion, string material, double pesoGramos)
+            : base(id, nombre, unidadesDisponibles, precioUnidad, descripcion)
         {
             Id = id;
             TipoMaterial = material;
@@ -62,7 +62,7 @@ namespace MaquinaVending {
         // Método que devuelve información sobre productos de tipo material precioso para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"1;{Nombre};{UnidadesMax};{UnidadesDisponibles};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";
+            return $"1;{Nombre};{UnidadesMax};{Unidades};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";
         }
 
     }
