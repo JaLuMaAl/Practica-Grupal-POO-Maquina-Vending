@@ -206,6 +206,8 @@ namespace MaquinaVending
 
                 } while (precio > 0) ;
 
+            Console.WriteLine("Se ha realizado la compra con éxito");
+
 
         }
 
