@@ -28,34 +28,32 @@ namespace MaquinaVending
                 Console.WriteLine("5. Salir");
                 Console.Write("Seleccione una opción: ");
                 opcion = int.Parse(Console.ReadLine());
-                
-                switch(opcion)
+                try 
                 {
-                    case 1:
-                        Console.Clear();
-                        maquinaVending.ComprarProductos();
-                        break;
-                    case 2:
-                        Console.Clear();
-                        maquinaVending.MostrarInfoProductos();
-                        break;
-                    case 3:
-                        Console.Clear();
-                        maquinaVending.CargaIndividual();
-                        break;
-                    case 4:
-                        Console.Clear();
-                        maquinaVending.CargaCompleta();
-                        break;
-                    case 5:
-                        Console.Clear();
-                        maquinaVending.SalirGuardar();
-                        break;
-                    default:
-                        Console.WriteLine("Opción no válida.");
-                        break;
+                    switch (opcion) {
+                        case 1:
+                            maquinaVending.ComprarProductos();
+                            break;
+                        case 2:
+                            maquinaVending.MostrarInfoProductos();
+                            break;
+                        case 3:
+                            maquinaVending.CargaIndividual();
+                            break;
+                        case 4:
+                            maquinaVending.CargaCompleta();
+                            break;
+                        case 5:
+                            maquinaVending.SalirGuardar();
+                            break;
+                        default:
+                            Console.WriteLine("Opción no válida.");
+                            break;
+                    }
                 }
-
+                catch (FormatException) {
+                    Console.WriteLine("Se ha producido un error, ingrese un número válido.");
+                }
                 Console.WriteLine("Pulsa para continuar...");
                 Console.ReadKey();
 

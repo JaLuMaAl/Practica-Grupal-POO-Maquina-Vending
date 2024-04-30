@@ -71,9 +71,8 @@ namespace MaquinaVending {
             }
             catch (FormatException) 
             {
-                Console.WriteLine("Se ha producido un error al introducir los valores, pruebe a vuelver a añadir el producto con unos valores válidos");
+                Console.WriteLine("Se ha producido un error al introducir los valores, pruebe a volver a añadir el producto con unos valores válidos");
             }
-
             return ejecucionCompletada;
         }
 
