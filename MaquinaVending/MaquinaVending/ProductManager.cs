@@ -29,33 +29,40 @@ namespace MaquinaVending
         // Solicita un ID y recorre la lista de productos en busca de un producto cuyo ID coincida con el introducido
         public Producto ElegirProducto()
         {
-            // Creo una instancia de la clase producto que almacenará el producto encontrado
+            // Creo una instancia null de la clase producto que almacenará el producto encontrado
             Producto pTemp = null;
+
             try 
             {
                 Console.Write("Introduce el ID del producto: ");
                 int id = int.Parse(Console.ReadLine());
 
                 // Recorro la lista de productos comparando sus IDs con el introducido por el usuario
-                foreach (Producto p in listaProductos) {
-                    if (p.Id == id) {
+                foreach (Producto p in listaProductos) 
+                {
+                    if (p.Id == id) 
+                    {
                         pTemp = p;
                     }
-                    else {
+                    else 
+                    {
                         Console.WriteLine("No se ha encontrado un producto con el ID introducido.");
                         Console.ReadKey();
                     }
                 }
             }
-            catch (FormatException) {
+            catch (FormatException) 
+            {
                 Console.WriteLine("Se ha producido un error, se esperaba un número entero para el ID del producto.");
             }
+
             // Devuelvo el producto almacenado en pTemp, si no ha encontrado el producto devolverá null
             return pTemp;
         }
 
         // Pagar con tarjeta
-        public void PagoTarjeta(double precio) {
+        public void PagoTarjeta(double precio) 
+        {
             try 
             {
                 Console.WriteLine("Introduce los siguientes datos para completar la compra:");
@@ -68,11 +75,11 @@ namespace MaquinaVending
                 Console.Write("Código de seguridad (CVV): ");
                 int cvv = int.Parse(Console.ReadLine());
 
-                Console.WriteLine($"Compra realizada con éxito por un importe de {precio}€");
+                Console.WriteLine($"Compra realizada con éxito por un importe de {precio} euros");
             }
             catch (FormatException) 
             {
-                Console.WriteLine("Se ha producido un error, se esperaba un número entero para el número de tarjeta, fecha de caducidad o CVV.");
+                Console.WriteLine("Se ha producido un error de formato, se esperaba un número entero para el número de tarjeta, fecha de caducidad o CVV.");
             }
         }
 
@@ -137,7 +144,7 @@ namespace MaquinaVending
             }
             catch (FormatException) 
             {
-                Console.WriteLine("Se ha producido un error, se esperaba un número entero para seleccionar el tipo de producto.");
+                Console.WriteLine("Se ha producido un error de formato, se esperaba un número entero para seleccionar el tipo de producto.");
             }
         }
 

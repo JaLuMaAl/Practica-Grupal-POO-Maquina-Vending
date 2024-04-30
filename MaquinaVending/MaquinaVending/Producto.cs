@@ -76,7 +76,7 @@ namespace MaquinaVending {
             return ejecucionCompletada;
         }
 
-        // Método abstracto encargado de devolver un string con la información de los productos, para facilitar su guardado en archivo
+        // Método abstracto encargado de devolver un string con la información de los productos para facilitar su guardado en archivo
         public abstract string SaveInfo();
     }
 }

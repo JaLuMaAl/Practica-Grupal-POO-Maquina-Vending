@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace MaquinaVending
 {
@@ -17,7 +16,7 @@ namespace MaquinaVending
 
         // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
         private int _claveSecreta;
-        
+
         public MaquinaVending()
         {
             // Instanciamos una nueva lista de productos
@@ -33,7 +32,8 @@ namespace MaquinaVending
         // Método encargado de proceso de compra de los productos 
         public void ComprarProductos()
         {
-            try {
+            try 
+            {
                 // Creamos una lista de tipo Producto llamada 'carrito'
                 List<Producto> carrito = new List<Producto>();
 
@@ -42,27 +42,33 @@ namespace MaquinaVending
                 double precioTotal = 0;
 
                 // Comprobamos si la máquina expendedora contiene productos
-                if (listaProductos.Count == 0) {
+                if (listaProductos.Count == 0) 
+                {
                     // Si la máquina esta vacia, no se pueden comprar productos
                     Console.WriteLine("La máquina no contiene productos.");
                 }
-                else {
+                else 
+                {
                     Console.WriteLine(" --- PRODUCTOS DISPONIBLES ---");
 
-                    foreach (Producto p in listaProductos) {
+                    foreach (Producto p in listaProductos)
+                    {
                         // Muestra la información parcial de cada producto disponible al usuario para que este elija
                         Console.WriteLine(p.MostrarInfoParcial());
                     }
 
                     // Bucle do-while por si el usuario desea comprar mas de un producto; se repite el proceso
-                    do {
+                    do
+                    {
                         // Creamos un objeto de tipo Producto y le asignamos el valor del producto elegido por el usuario
                         Producto productoElegido = productManager.ElegirProducto();
 
                         // Se comprueba si el producto elegido existe
-                        if (productoElegido != null) {
+                        if (productoElegido != null) 
+                        {
                             // Si hay unidades disponibles del producto elegido
-                            if (productoElegido.Unidades > 0) {
+                            if (productoElegido.Unidades > 0) 
+                            {
                                 // Se añade el producto elegido a la lista de tipo Producto 'carrito'
                                 carrito.Add(productoElegido);
 
@@ -75,23 +81,27 @@ namespace MaquinaVending
                                 Console.Write("Desea comprar otro producto? (1.Sí / 2.No): ");
                                 opcion = int.Parse(Console.ReadLine());
                             }
-                            else {
+                            else 
+                            {
                                 // Si no hay unidades disponibles del producto elegido
                                 Console.WriteLine("No hay unidades disponibles de este producto.");
                             }
                         }
                         // Si el producto elegido no existe
-                        else {
+                        else 
+                        {
                             Console.WriteLine("El producto con el ID introducido no esta disponible.");
                         }
                     } while (opcion == 1);
 
                     // Si la lista de productos del usuario para comprar no esta vacia
-                    if (carrito.Count > 0) {
+                    if (carrito.Count > 0) 
+                    {
                         Console.WriteLine("Tu carrito incluye:");
 
                         // Se muestra por pantalla los productos en el carrito de compra del usuario
-                        foreach (Producto p in carrito) {
+                        foreach (Producto p in carrito)
+                        {
                             Console.WriteLine($"{p.Nombre}");
                         }
 
@@ -101,10 +111,12 @@ namespace MaquinaVending
                     }
                 }
             }
-            catch (FormatException) {
+            catch (FormatException) 
+            {
                 Console.WriteLine("Se ha producido un error al leer la opción ingresada. Debe ingresar un número.");
             }
-            catch (IOException) {
+            catch (IOException) 
+            {
                 Console.WriteLine("Se ha producido un error de E/S al leer los datos de entrada.");
             }
         }
@@ -112,18 +124,20 @@ namespace MaquinaVending
         // Realizar el pago en base a un valor numérico recibido
         private void Pagar(double precio)
         {
-            try 
+            try
             {
                 Console.WriteLine("Métodos de pago disponible");
                 Console.WriteLine("\t1. Tarjeta\n\t2. Efectivo\n\t3. Cancelar operación");
 
                 int opcion = 0;
 
-                do {
+                do 
+                {
                     Console.Write("Opción: ");
                     opcion = int.Parse(Console.ReadLine());
 
-                    switch (opcion) {
+                    switch (opcion) 
+                    {
                         case 1:
                             productManager.PagoTarjeta(precio);
                             break;
@@ -139,7 +153,7 @@ namespace MaquinaVending
                     // Si la opción introducida por el usuario no es válida, se pregunta por una opción por pantalla otra vez
                 } while (opcion < 1 || opcion > 3);
             }
-            catch (FormatException) 
+            catch (FormatException)
             {
                 Console.WriteLine("Se ha producido un error al leer la opción ingresada. Debe ingresar un número.");
             }
@@ -233,44 +247,48 @@ namespace MaquinaVending
         // Método que permite al Admin cargar productos directamente de un archivo introduciendo su nombre
         public void CargaCompleta()
         {
-            try {
-                // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
-                bool accesoAdmin = CheckAdmin();
+            // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
+            bool accesoAdmin = CheckAdmin();
 
             if (accesoAdmin)
             {
                 Console.WriteLine("A continuación se solicitará el nombre del archivo que desea emplear para la carga de productos.\n " +
-                    "Recuerde que para que se realice correctamente el archivo .csv debe encontrarse en la carpeta /bin/debug dentro de la carpeta de la solución del programa.");
+                      "Recuerde que para que se realice correctamente el archivo .csv debe encontrarse en la carpeta /bin/debug dentro de la carpeta de la solución del programa.");
                 Console.WriteLine("Introduce el nombre del archivo .csv: ");
-                
+
                 string archivoCarga = Console.ReadLine();
 
                 productManager.CargaProductosArchivo(archivoCarga);
             }
-            
         }
 
         // Método booleano que compureba si clave secreta introducida por el usuario es correcta para permitir el acceso a las funciones de admin
         private bool CheckAdmin()
         {
             bool check = false;
-            try {
+
+            try
+            {
                 // Solicito la clave secreta al usuario por pantalla
                 Console.WriteLine("Introduce clave secreta: ");
                 int clave = int.Parse(Console.ReadLine());
 
                 // Comparo la clave del usuario con la clave secreta establecida en el constructor
-                if (clave == ClaveSecreta) {
+                if (clave == _claveSecreta)
+                {
                     Console.WriteLine("Clave secreta correcta. Bienvenido Administrador.");
                     check = true;
                 }
-                else if (clave != ClaveSecreta) {
+                else if (clave != _claveSecreta)
+                {
                     Console.WriteLine("Clave secreta incorrecta. Acceso denegado");
                 }
             }
-            catch (FormatException) {
+            catch (FormatException)
+            {
                 Console.WriteLine("Se ha producido un error al ingresar la clave. Debe ser un número entero.");
             }
+
             return check;
         }
 
