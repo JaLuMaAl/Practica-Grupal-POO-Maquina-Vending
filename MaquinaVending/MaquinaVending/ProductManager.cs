@@ -111,7 +111,6 @@ namespace MaquinaVending
                 Console.WriteLine("8. Moneda 2 euros");
                 Console.WriteLine("9. billete 5 euros");
                 Console.WriteLine("10. billete 10 euros");
-                Console.WriteLine("11. billete 20 euros");
                 Console.Write("Qué forma de pago desea emplear: ");
 
                 try
@@ -164,39 +163,31 @@ namespace MaquinaVending
 
                         case 7:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int mon7 = int.Parse(Console.ReadLine());
+                            int mon1 = int.Parse(Console.ReadLine());
 
-                            precio -= (mon7 * euro7);
+                            precio -= (mon1 * euro1);
                             break;
 
                         case 8:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int unit = int.Parse(Console.ReadLine());
+                            int mon2 = int.Parse(Console.ReadLine());
 
-                            precio -= (unit1 * cent1);
+                            precio -= (mon2 * euro2);
                             break;
 
                         case 9:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int mon2 = int.Parse(Console.ReadLine());
+                            int bill5 = int.Parse(Console.ReadLine());
 
-                            precio -= (mon2 * cent1);
+                            precio -= (bill5 * billete5);
                             break;
 
                         case 10:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int moneda2 = int.Parse(Console.ReadLine());
+                            int bill10 = int.Parse(Console.ReadLine());
 
-                            precio -= (unit1 * cent1);
+                            precio -= (bill10 * billete10);
                             break;
-
-                        case 11:
-                            Console.Write("Cuántas unidades desea insertar: ");
-                            int moneda1 = int.Parse(Console.ReadLine());
-
-                            precio -= (unit1 * cent1);
-                            break;
-
                     }
                 }
                 catch (FormatException)
