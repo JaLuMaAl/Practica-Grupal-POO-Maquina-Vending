@@ -12,7 +12,7 @@ namespace MaquinaVending
     {
         // Establecemos una lista de productos y un objeto de la clase ProductManager
         public List<Producto> listaProductos;
-        public ProductManager productManager;
+        private ProductManager productManager;
 
         // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
         private int _claveSecreta;

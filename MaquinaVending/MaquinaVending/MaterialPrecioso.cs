@@ -9,8 +9,8 @@ namespace MaquinaVending {
     internal class MaterialPrecioso : Producto 
     {
         // Atributos exclusivos de los productos de tipo material precioso
-        private string TipoMaterial;
-        private double PesoGramos;
+        private string _tipoMaterial;
+        private double _pesoGramos;
 
         // Constructor vacío
         public MaterialPrecioso() { }
@@ -19,8 +19,8 @@ namespace MaquinaVending {
         public MaterialPrecioso(int id, string nombre, int unidades, double precioUnidad, string descripcion, string material, double pesoGramos)
             : base(id, nombre, unidades, precioUnidad, descripcion)
         {
-            TipoMaterial = material;
-            PesoGramos = pesoGramos;
+            _tipoMaterial = material;
+            _pesoGramos = pesoGramos;
         }
 
         public MaterialPrecioso(int id) : base(id) { }
@@ -29,8 +29,8 @@ namespace MaquinaVending {
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}" +
-                $"Tipo de Material: {TipoMaterial}\n" +
-                $"Peso (gramos): {PesoGramos}\n";
+                $"Tipo de Material: {_tipoMaterial}\n" +
+                $"Peso (gramos): {_pesoGramos}\n";
         }
 
         // Método para solicitar detalles del producto del tipo material precioso
@@ -45,9 +45,9 @@ namespace MaquinaVending {
                 try 
                 {
                     Console.WriteLine("Introduzca el tipo de material del que está compuesto el producto: ");
-                    TipoMaterial = Console.ReadLine();
+                    _tipoMaterial = Console.ReadLine();
                     Console.WriteLine("Introduzca el peso del producto (gramos) con decimales: ");
-                    PesoGramos = int.Parse(Console.ReadLine());
+                    _pesoGramos = int.Parse(Console.ReadLine());
                 }
                 catch (FormatException) 
                 {
@@ -61,10 +61,10 @@ namespace MaquinaVending {
             return ejecucionCompletada;
         }
 
-        // Método que devuelve información sobre productos de tipo material precioso para guardar en un archivo csv
+        // Método que devuelve información sobre productos material precioso para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"1;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{TipoMaterial};{PesoGramos};;;;;";
+            return $"1;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{_tipoMaterial};{_pesoGramos};;;;;";
         }
 
     }

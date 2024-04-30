@@ -9,10 +9,10 @@ namespace MaquinaVending
 {
     internal class PElectronico : Producto 
     {
-        // Propiedades exclusivas de productos electrónicos
-        public string Materiales { get; set; }
-        public bool IncluyePilas { get; set; }
-        public bool Precargado { get; set; }
+        // Atributos exclusivos de productos electrónicos
+        private string _materiales;
+        private bool _incluyePilas;
+        private bool _precargado;
 
         // Constructor vacío
         public PElectronico() { }
@@ -21,10 +21,9 @@ namespace MaquinaVending
         public PElectronico(int id, string nombre, int unidadesDisponibles, double precioUnidad, string descripcion,string materiales, bool incluyePilas, bool precargado)
             :base(id,nombre, unidadesDisponibles, precioUnidad, descripcion)
         {
-            Materiales = materiales;
-            IncluyePilas = incluyePilas;
-            Precargado = precargado;
-            
+            _materiales = materiales;
+            _incluyePilas = incluyePilas;
+            _precargado = precargado;          
         }
 
         public PElectronico(int id):base(id) { }
@@ -33,9 +32,9 @@ namespace MaquinaVending
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}" +
-                   $"Materiales empleados: {Materiales}"+
-                   $"¿Incluye pilas?: {(IncluyePilas ? "Sí" : "No")}\n" +
-                   $"¿Está precargado?: {(Precargado ? "Sí" : "No")}\n";
+                   $"Materiales empleados: {_materiales}"+
+                   $"¿Incluye pilas?: {(_incluyePilas ? "Sí" : "No")}\n" +
+                   $"¿Está precargado?: {(_precargado ? "Sí" : "No")}\n";
         }
 
         // Método para solicitar detalles de productos electrónicos
@@ -48,7 +47,7 @@ namespace MaquinaVending
                 try 
                 {
                     Console.Write("Introduzca los materiales utilizados en la fabricación del producto: ");
-                    Materiales = Console.ReadLine();
+                    _materiales = Console.ReadLine();
 
                     // Solicitar la inclusión de pilas del producto
                     int pilas = 0;
@@ -59,11 +58,11 @@ namespace MaquinaVending
 
                         if (pilas == 1)
                         {
-                            IncluyePilas = true;
+                            _incluyePilas = true;
                         }
                         else if (pilas == 0)
                         {
-                            IncluyePilas = false;
+                            _incluyePilas = false;
                         }
                         else
                         {
@@ -82,11 +81,11 @@ namespace MaquinaVending
 
                         if (precargado == 1)
                         {
-                            Precargado = true;
+                            _precargado = true;
                         }
                         else if (precargado == 0)
                         {
-                            Precargado = false;
+                            _precargado = false;
                         }
                         else
                         {
@@ -108,7 +107,7 @@ namespace MaquinaVending
         // Método que devuelve información sobre productos electrónicos para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"3;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{Materiales};;;;;{(IncluyePilas ? "1" : "0")};{(Precargado ? "1" : "0")}";
+            return $"3;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};{_materiales};;;;;{(_incluyePilas ? "1" : "0")};{(_precargado ? "1" : "0")}";
         }
 
     }

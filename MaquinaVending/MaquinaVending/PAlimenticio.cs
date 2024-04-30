@@ -9,10 +9,10 @@ namespace MaquinaVending
 {
     internal class PAlimenticio : Producto
     {
-        // Propiedades exclusivas de productos alimenticios
-        public int Calorias { get; set; }
-        public int Grasa { get; set; }
-        public int Azucar {  get; set; }
+        // Atributos exclusivos de productos alimenticios
+        private int _calorias;
+        private int _grasa;
+        private int _azucar;
 
         // Constructor vacío
         public PAlimenticio() { } 
@@ -21,10 +21,9 @@ namespace MaquinaVending
         public PAlimenticio(int id,string nombre, int unidades, double precioUnidad, string descripcion, int kcal, int grasa, int azucar)
             :base(id, nombre, unidades, precioUnidad, descripcion)
         {
-            Id = id;
-            Calorias = kcal;
-            Grasa = grasa;
-            Azucar = azucar;
+            _calorias = kcal;
+            _grasa = grasa;
+            _azucar = azucar;
         }
 
         public PAlimenticio(int id) : base(id) { }
@@ -33,9 +32,9 @@ namespace MaquinaVending
         public override string MostrarInfoTotal()
         {
             return $"{base.MostrarInfoTotal()}" +
-                $"\nCalorías: {Calorias} kcal\n" +
-                $"Grasa: {Grasa}g\n" +
-                $"Azucar: {Azucar}g\n";
+                $"\nCalorías: {_calorias} kcal\n" +
+                $"Grasa: {_grasa}g\n" +
+                $"Azucar: {_azucar}g\n";
         }
 
         // Método para solicitar detalles de productos alimenticios
@@ -50,13 +49,13 @@ namespace MaquinaVending
                 try 
                 {
                     Console.Write("Introduce las calorías: ");
-                    Calorias = int.Parse(Console.ReadLine());
+                    _calorias = int.Parse(Console.ReadLine());
 
                     Console.Write("Introduce la cantidad de grasa (en gramos): ");
-                    Grasa = int.Parse(Console.ReadLine());
+                    _grasa = int.Parse(Console.ReadLine());
 
                     Console.Write("Introduce la cantidad de azúcar (en gramos): ");
-                    Azucar = int.Parse(Console.ReadLine());
+                    _azucar = int.Parse(Console.ReadLine());
                 }
                 catch (FormatException) 
                 {
@@ -74,7 +73,7 @@ namespace MaquinaVending
         // Método que devuelve información sobre productos alimenticios para guardar en un archivo csv
         public override string SaveInfo()
         {
-            return $"2;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};;;{Calorias};{Grasa};{Azucar};;";
+            return $"2;{Id};{Nombre};{Unidades};{PrecioUnidad};{Descripcion};;;{_calorias};{_grasa};{_azucar};;";
         }
     }
 }

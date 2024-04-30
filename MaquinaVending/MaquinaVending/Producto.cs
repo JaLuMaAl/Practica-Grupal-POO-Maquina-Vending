@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending {
-    internal abstract class Producto {
-        public int Id { get; set; }
+    internal abstract class Producto 
+    {
+        public int Id { get; }
         public string Nombre { get; set; }
         public int Unidades { get; set; }
         public double PrecioUnidad { get; set; }
@@ -75,6 +76,8 @@ namespace MaquinaVending {
 
             return ejecucionCompletada;
         }
+
+        // Método abstracto encargado de devolver un string con la información de los productos, para facilitar su guardado en archivo
         public abstract string SaveInfo();
     }
 }
