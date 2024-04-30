@@ -10,7 +10,7 @@ namespace MaquinaVending
     {
         static void Main(string[] args)
         {
-            // Instancio un objeto de la clase MaquinaVending
+            // Instancio un objeto de la clase MaquinaVending y con ella 
             MaquinaVending maquinaVending = new MaquinaVending();
 
             int opcion = 0;
@@ -22,7 +22,7 @@ namespace MaquinaVending
 
                 Console.WriteLine(" --- MÁQUINA VENDING UFV --- ");
                 Console.WriteLine("1. Comprar Productos");
-                Console.WriteLine("2. Mostrar información de Producto");
+                Console.WriteLine("2. Mostrar información de los Productos");
                 Console.WriteLine("3. Carga individual de Productos");
                 Console.WriteLine("4. Carga completa de Productos");
                 Console.WriteLine("5. Salir");
@@ -31,19 +31,24 @@ namespace MaquinaVending
                 
                 switch(opcion)
                 {
-                    case 1: 
+                    case 1:
+                        Console.Clear();
                         maquinaVending.ComprarProductos();
                         break;
                     case 2:
+                        Console.Clear();
                         maquinaVending.MostrarInfoProductos();
                         break;
                     case 3:
+                        Console.Clear();
                         maquinaVending.CargaIndividual();
                         break;
                     case 4:
+                        Console.Clear();
                         maquinaVending.CargaCompleta();
                         break;
                     case 5:
+                        Console.Clear();
                         maquinaVending.SalirGuardar();
                         break;
                     default:

@@ -19,7 +19,7 @@ namespace MaquinaVending
         // Constructor vacío
         public ProductManager() { }
         
-        // Constructor parametrizado
+        // Constructor parametrizado que recibe una lista de productos
         public ProductManager(List<Producto> listaP)
         {
             listaProductos = listaP;
@@ -53,7 +53,7 @@ namespace MaquinaVending
             return pTemp;
         }
 
-        // Método para pagar con tarjeta
+        // Pagar con tarjeta
         public void PagoTarjeta(double precio)
         {
             Console.WriteLine("Introduce los siguientes datos para completar la compra:");
@@ -66,16 +66,16 @@ namespace MaquinaVending
             Console.Write("Código de seguridad (CVV): ");
             int cvv = int.Parse(Console.ReadLine());
 
-            Console.WriteLine($"Compra realizada con éxito por un importe de {precio}€");
+            Console.WriteLine($"Compra realizada con éxito por un importe de {precio}€. Disfrute de sus productos");
         }
 
-        // Método para pagar con efectivo
+        // Pagar con efectivo
         public void PagoEfectivo(double precio)
         {
-
+            int cent1, cent2, cent5, cent10, cent20, cent50, euro1, euro2, billete5, billete10, billete20, billete50, billete100;
         }
 
-        // Método para añadir producto nuevo dentro del método CargaIndividual()
+        // Método para añadir un nuevo producto
         public void AddNewProduct()
         {
             Console.WriteLine("Qué tipo de producto desea añadir?");

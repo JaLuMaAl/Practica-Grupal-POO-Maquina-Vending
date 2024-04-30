@@ -9,17 +9,19 @@ namespace MaquinaVending
 {
     internal class MaquinaVending
     {
-        // Creamos una lista de productos y un objeto de la clase ProductManager
+        // Establecemos una lista de productos y un objeto de la clase ProductManager
         public List<Producto> listaProductos;
         public ProductManager productManager;
 
         // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
         public int ClaveSecreta {  get; set; }
         
-        // Constructor parametrizado
         public MaquinaVending()
         {
+            // Instanciamos una nueva lista de productos
             listaProductos = new List<Producto>();
+
+            // Instanciamos un objeto de la clase ProductManager, que se encargará de las relaciones con los productos
             productManager = new ProductManager(listaProductos);
 
             // Establecemos la clave secreta del admin internamente en el programa, se supone que como es el admin debe conocerla
@@ -110,7 +112,7 @@ namespace MaquinaVending
             }
         }
 
-        // Método para finalizar compra de productos mediante pago efectivo o por tarjeta
+        // Realizar el pago en base a un valor numérico recibido
         private void Pagar(double precio)
         {
             Console.WriteLine("Métodos de pago disponible");
@@ -118,6 +120,7 @@ namespace MaquinaVending
 
             int opcion = 0;
 
+            // El usuario selecciona el método de pago
             do
             {
                 Console.Write("Opción: ");
@@ -134,28 +137,33 @@ namespace MaquinaVending
                     case 3:
                         break;
                     default:
-                        Console.WriteLine("Opción no válida. Vuelve a introducir la opción.");
+                        Console.WriteLine("Opción no válida. Pruebe de nuevo");
                         break;
                 }
-                // Si la opción introducida por el usuario no es válida, se pregunta por una opción por pantalla otra vez
+
+                // Si la opción introducida por el usuario no es válida, se vuelve a solicitar
             } while (opcion < 1 || opcion > 3);
         }
 
         // Método que muestra la información de los productos
         public void MostrarInfoProductos()
         {
-            // Compruebo que la máquina contiene productos, y no está vacía
+            // Compruebo que la máquina contiene productos, y por tanto no está vacía
             if (listaProductos.Count > 0)
             {
+                Console.WriteLine("PRODUCTOS DISPONIBLES");
+
+                // Muestro para cada producto su información más relevante
                 foreach (Producto producto in listaProductos)
                 {
                     // El método MostrarInfoParcial excluye información específica de cada producto
                     Console.WriteLine(producto.MostrarInfoParcial());
                 }
 
-                // Creamos un objeto de tipo producto 'p' y le asignamos el producto elegido por el usuario. Despues se muestra la información completa de este producto por pantalla.
+                // Pedimos al usuario que eliga un producto
                 Producto p = productManager.ElegirProducto();
 
+                // Si el producto seleccionado existe, muestro toda su información
                 if (p != null)
                 {
                     Console.WriteLine(p.MostrarInfoTotal());
