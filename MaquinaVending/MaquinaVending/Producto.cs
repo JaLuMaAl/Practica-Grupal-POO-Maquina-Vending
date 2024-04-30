@@ -34,17 +34,17 @@ namespace MaquinaVending {
         public string MostrarInfoParcial() 
         {
             return $"({Id}) {Nombre}\n" +
-                $"Unidades disponibles: {Unidades} \n" +
-                $"Precio: {PrecioUnidad} euros / unidad";
+                $"\tUnidades disponibles: {Unidades} \n" +
+                $"\tPrecio: {PrecioUnidad} euros / unidad";
         }
 
         // Método que devuelve un string con la información del producto
         public virtual string MostrarInfoTotal()
         {
             return $"({Id}) {Nombre}\n" +
-                $"Unidades disponibles: {Unidades} \n" +
-                $"Precio: {PrecioUnidad} euros / unidad\n" +
-                $"{Descripcion}";
+                $"\tUnidades disponibles: {Unidades} \n" +
+                $"\tPrecio: {PrecioUnidad} euros / unidad\n" +
+                $"\t{Descripcion}";
         }
 
         // Método que solicita los detalles del producto y modifica las propiedades del mismo

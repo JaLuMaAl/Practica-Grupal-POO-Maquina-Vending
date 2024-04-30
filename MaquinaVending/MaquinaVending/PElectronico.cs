@@ -32,9 +32,9 @@ namespace MaquinaVending
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}" +
-                   $"Materiales empleados: {_materiales}"+
-                   $"¿Incluye pilas?: {(_incluyePilas ? "Sí" : "No")}\n" +
-                   $"¿Está precargado?: {(_precargado ? "Sí" : "No")}\n";
+                   $"\tMateriales empleados: {_materiales}"+
+                   $"\tIncluye pilas: {(_incluyePilas ? "Sí" : "No")}\n" +
+                   $"\tEstá precargado: {(_precargado ? "Sí" : "No")}\n";
         }
 
         // Método para solicitar detalles de productos electrónicos

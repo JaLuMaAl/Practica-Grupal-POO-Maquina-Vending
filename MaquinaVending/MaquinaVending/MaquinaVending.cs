@@ -165,7 +165,7 @@ namespace MaquinaVending
             // Compruebo que la máquina contiene productos, y por tanto no está vacía
             if (listaProductos.Count > 0)
             {
-                Console.WriteLine("PRODUCTOS DISPONIBLES");
+                Console.WriteLine(" --- PRODUCTOS DISPONIBLES ---");
 
                 // Muestro para cada producto su información más relevante
                 foreach (Producto producto in listaProductos)
@@ -247,14 +247,16 @@ namespace MaquinaVending
         // Método que permite al Admin cargar productos directamente de un archivo introduciendo su nombre
         public void CargaCompleta()
         {
+            Console.WriteLine(" --- CARGA COMPLETA DE PRODUCTOS ---");
+            
             // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
             bool accesoAdmin = CheckAdmin();
 
             if (accesoAdmin)
             {
-                Console.WriteLine("A continuación se solicitará el nombre del archivo que desea emplear para la carga de productos.\n " +
-                      "Recuerde que para que se realice correctamente el archivo .csv debe encontrarse en la carpeta /bin/debug dentro de la carpeta de la solución del programa.");
-                Console.WriteLine("Introduce el nombre del archivo .csv: ");
+                Console.WriteLine("A continuación se solicitará el nombre del archivo que desea emplear para la carga de productos.\n" +
+                      "Recuerde que para que se realice correctamente el archivo .csv debe encontrarse en la carpeta /bin/debug dentro de la carpeta de la solución del programa.\n");
+                Console.Write("Introduce el nombre del archivo .csv: ");
 
                 string archivoCarga = Console.ReadLine();
 
@@ -269,19 +271,21 @@ namespace MaquinaVending
 
             try
             {
+
+                Console.WriteLine("Esta acción solo está disponible para el administrador");
                 // Solicito la clave secreta al usuario por pantalla
-                Console.WriteLine("Introduce clave secreta: ");
+                Console.Write("Introduce clave secreta: ");
                 int clave = int.Parse(Console.ReadLine());
 
                 // Comparo la clave del usuario con la clave secreta establecida en el constructor
                 if (clave == _claveSecreta)
                 {
-                    Console.WriteLine("Clave secreta correcta. Bienvenido Administrador.");
+                    Console.WriteLine("\n¡Clave secreta correcta! Bienvenido Administrador.");
                     check = true;
                 }
                 else if (clave != _claveSecreta)
                 {
-                    Console.WriteLine("Clave secreta incorrecta. Acceso denegado");
+                    Console.WriteLine("\nClave secreta incorrecta. Acceso denegado");
                 }
             }
             catch (FormatException)

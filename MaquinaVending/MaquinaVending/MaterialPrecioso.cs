@@ -29,8 +29,8 @@ namespace MaquinaVending {
         public override string MostrarInfoTotal() 
         {
             return $"{base.MostrarInfoTotal()}" +
-                $"Tipo de Material: {_tipoMaterial}\n" +
-                $"Peso (gramos): {_pesoGramos}\n";
+                $"\tMaterial: {_tipoMaterial}\n" +
+                $"\tPeso: {_pesoGramos} gramos";
         }
 
         // Método para solicitar detalles del producto del tipo material precioso
