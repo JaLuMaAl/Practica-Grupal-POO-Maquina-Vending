@@ -144,32 +144,41 @@ namespace MaquinaVending
             }
             catch (FormatException) 
             {
-                Console.WriteLine("Se ha producido un error de formato, se esperaba un número entero para seleccionar el tipo de producto.");
+                Console.WriteLine("Se ha producido un error de formato.");
             }
         }
 
         // Método que recibe un producto, solicita un número de unidades a reponer y las añade a las existentes
         public void ReponerProducto(Producto producto)
         {
-            try 
+            // Compruebo que el producto recibido no es null
+            if (producto != null)
             {
-                // Compruebo que el producto recibido no es null
-                if (producto != null) 
+                try
                 {
                     // Solicito el número de unidades a reponer
                     Console.WriteLine($"El producto {producto.Nombre} dispone de {producto.Unidades} unidades disponibles");
                     Console.Write($"Introduce el número de unidades desea reponer: ");
                     int unidadesRepuestas = int.Parse(Console.ReadLine());
 
-                    // Añado las unidades recibidas a las unidades del producto
-                    producto.Unidades += unidadesRepuestas;
+                    // Compruebo que las unidades introducidas no son negativas
+                    if (unidadesRepuestas > 0)
+                    {
+                        // Añado las unidades recibidas a las unidades del producto
+                        producto.Unidades += unidadesRepuestas;
 
-                    Console.WriteLine($"Se han añadido {unidadesRepuestas} unidades, {producto.Nombre} ahora cuenta con {producto.Unidades} unidades.");
+                        Console.WriteLine($"Se han añadido {unidadesRepuestas} unidades, {producto.Nombre} ahora cuenta con {producto.Unidades} unidades.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No se pueden reponer unidades negativas");
+                    }
                 }
-            }
-            catch (FormatException) 
-            {
-                Console.WriteLine("Se ha producido un error, se esperaba un número entero para las unidades a reponer.");
+                catch (FormatException)
+                {
+                    Console.WriteLine("Se ha producido un error de formato, se esperaba un número entero para las unidades a reponer.");
+                }
+
             }
         }
 
