@@ -4,6 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MaquinaVending
 {
@@ -14,7 +15,7 @@ namespace MaquinaVending
         public ProductManager productManager;
 
         // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
-        private int ClaveSecreta {  get; set; }
+        private int _claveSecreta;
         
         public MaquinaVending()
         {
@@ -25,10 +26,7 @@ namespace MaquinaVending
             productManager = new ProductManager(listaProductos);
 
             // Establecemos la clave secreta del admin internamente en el programa, se supone que como es el admin debe conocerla
-            ClaveSecreta = 247209;
-
-            // Cargar los productos del archivo "productos.csv"
-            productManager.CargaProductosArchivo();
+            _claveSecreta = 247209;
         }
 
         // Método encargado de proceso de compra de los productos 
@@ -233,26 +231,23 @@ namespace MaquinaVending
            
         }
 
-        // Método que permite al Admin reponer todos los productos a la vez, una cantidad determinada de unidades
+        // Método que permite al Admin cargar productos directamente de un archivo introduciendo su nombre
         public void CargaCompleta()
         {
             // Variable que almacena True si el admin ha introducido bien la clave y False si la clave es incorrecta
             bool accesoAdmin = CheckAdmin();
 
-            // Si el usuario es el admin, permito realizar la acción
             if (accesoAdmin)
             {
-                // Reponer todos los productos
-                Console.Write($"Se van a reponer todos los productos simultáneamente, introduzca el número de unidades que se desean reponer: ");
-                int unidadesRepuestas = int.Parse(Console.ReadLine());
+                Console.WriteLine("A continuación se solicitará el nombre del archivo que desea emplear para la carga de productos.\n " +
+                    "Recuerde que para que se realice correctamente el archivo .csv debe encontrarse en la carpeta /bin/debug dentro de la carpeta de la solución del programa.");
+                Console.WriteLine("Introduce el nombre del archivo .csv: ");
+                
+                string archivoCarga = Console.ReadLine();
 
-                foreach (Producto p in listaProductos)
-                {
-                    p.Unidades += unidadesRepuestas;
-                }
-
-                Console.WriteLine("Las unidades de los productos se han repuesto con éxito");
+                productManager.CargaProductosArchivo(archivoCarga);
             }
+            
         }
 
         // Método booleano que compureba si clave secreta introducida por el usuario es correcta para permitir el acceso a las funciones de admin
@@ -265,12 +260,12 @@ namespace MaquinaVending
             int clave = int.Parse(Console.ReadLine());
 
             // Comparo la clave del usuario con la clave secreta establecida en el constructor
-            if (clave == ClaveSecreta)
+            if (clave == _claveSecreta)
             {
                 Console.WriteLine("Clave secreta correcta. Bienvenido Administrador.");
                 check = true;
             }
-            else if (clave != ClaveSecreta)
+            else if (clave != _claveSecreta)
             {
                 Console.WriteLine("Clave secreta incorrecta. Acceso denegado");
             }

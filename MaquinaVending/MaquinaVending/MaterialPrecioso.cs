@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace MaquinaVending {
     internal class MaterialPrecioso : Producto 
     {
-        // Propiedades exclusivas de productos de tipo material precioso
-        public string TipoMaterial { get; set; }
-        public double PesoGramos { get; set; }
+        // Atributos exclusivos de los productos de tipo material precioso
+        private string TipoMaterial;
+        private double PesoGramos;
 
         // Constructor vacío
         public MaterialPrecioso() { }
