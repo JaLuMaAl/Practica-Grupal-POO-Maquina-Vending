@@ -66,7 +66,6 @@ namespace MaquinaVending
                     ejecucionCompletada = false; 
                 }
             }
-
             return ejecucionCompletada;
         }
 

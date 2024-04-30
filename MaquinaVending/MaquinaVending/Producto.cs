@@ -72,10 +72,6 @@ namespace MaquinaVending {
             {
                 Console.WriteLine("Se ha producido un error al introducir los valores, pruebe a volver a añadir el producto con unos valores válidos");
             }
-            catch (ArgumentException) {
-                Console.WriteLine("Los valores no pueden estar vacíos o ser solo espacios, pruebe a volver a añadir el producto con unos valores válidos");
-            }
-
             return ejecucionCompletada;
         }
         public abstract string SaveInfo();
