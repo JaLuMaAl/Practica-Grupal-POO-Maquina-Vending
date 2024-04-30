@@ -164,9 +164,9 @@ namespace MaquinaVending
 
                         case 7:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int unit1 = int.Parse(Console.ReadLine());
+                            int mon7 = int.Parse(Console.ReadLine());
 
-                            precio -= (unit1 * cent1);
+                            precio -= (mon7 * euro7);
                             break;
 
                         case 8:
@@ -178,9 +178,9 @@ namespace MaquinaVending
 
                         case 9:
                             Console.Write("Cuántas unidades desea insertar: ");
-                            int unit1 = int.Parse(Console.ReadLine());
+                            int mon2 = int.Parse(Console.ReadLine());
 
-                            precio -= (unit1 * cent1);
+                            precio -= (mon2 * cent1);
                             break;
 
                         case 10:
