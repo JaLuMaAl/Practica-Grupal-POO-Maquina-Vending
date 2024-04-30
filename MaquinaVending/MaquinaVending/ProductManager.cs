@@ -56,7 +56,7 @@ namespace MaquinaVending
         // Pagar con tarjeta
         public void PagoTarjeta(double precio)
         {
-            Console.WriteLine("Introduce los siguientes datos para completar la compra:");
+            Console.WriteLine(" --- Introduce los siguientes datos para completar la compra --- ");
             Console.Write("Número de tarjeta: ");
             int nTarjeta = int.Parse(Console.ReadLine());
 
@@ -72,7 +72,10 @@ namespace MaquinaVending
         // Pagar con efectivo
         public void PagoEfectivo(double precio)
         {
-            int cent1, cent2, cent5, cent10, cent20, cent50, euro1, euro2, billete5, billete10, billete20, billete50, billete100;
+            Console.WriteLine(" --- Introduzca monedas o billetes para finalizar la compra --- ");
+            
+            double cantidadIntroducida = Convert.ToDouble(Console.ReadLine());
+
         }
 
         // Método para añadir un nuevo producto
