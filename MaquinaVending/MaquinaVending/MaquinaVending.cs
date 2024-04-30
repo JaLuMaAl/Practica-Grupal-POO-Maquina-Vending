@@ -15,7 +15,7 @@ namespace MaquinaVending
         public ProductManager productManager;
 
         // Clave secreta del usuario administrador de la máquina para poder acceder sus funcionalidades exclusivas
-        public int ClaveSecreta {  get; set; }
+        private int ClaveSecreta {  get; set; }
         
         // Constructor parametrizado
         public MaquinaVending()

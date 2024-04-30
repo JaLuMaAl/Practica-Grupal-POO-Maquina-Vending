@@ -79,6 +79,9 @@ namespace MaquinaVending
         // Método para pagar con efectivo
         public void PagoEfectivo(double precio)
         {
+            Console.WriteLine(" --- Introduzca monedas o billetes para finalizar la compra --- ");
+            
+            double cantidadIntroducida = Convert.ToDouble(Console.ReadLine());
 
         }
 
